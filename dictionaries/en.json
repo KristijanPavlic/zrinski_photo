@@ -1,0 +1,46 @@
+{
+  "navigation": {
+    "home": "Home",
+    "gallery": "Gallery",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "page": {
+    "home": {
+      "title": "Welcome to Zrinski Photography",
+      "description": "Creating mosaics of your favourite moments",
+      "btn1": "View Gallery",
+      "btn2": "Contact Us"
+    },
+    "gallery": {
+      "title": "Gallery",
+      "description": "This is the gallery page"
+    },
+    "about": {
+      "title": "About",
+      "description": {
+        "first": "The main photographer and founder of the Zagreb-based studio is Antonija Zrinski, she began her career in 2010. She now leads a team of multiple photographers, handling all editing and client communication.",
+        "second": "Capturing weddings, christenings, as well as kids, pregnancy, and family portraits is what we do the most. Each member of our team has years of photography experience. We specialize in creating a relaxed environment for our clients, regardless of age, to bring out genuine smiles and capture the most exceptional photographs.",
+        "third": "Thank you for choosing us to create the most beautiful mosaic of your special day!"
+      }
+    },
+    "contact": {
+      "title": "Contact Us",
+      "first": "We'd love to hear from you! If you have any questions, inquiries, or if you're interested in booking a session, please don't hesitate to get in touch with us.",
+      "ouremail": " az.photography.hr@gmail.com",
+      "ourphone": " (+385) 98 938 9481",
+      "second": "You can also reach out to us via the contact form. We'll do our best to respond to your message promptly.",
+      "email": "Email:",
+      "phone": "Phone:",
+      "enteremail": "Enter your email address",
+      "message": "Message:",
+      "entermessage": "Enter your message",
+      "btn": "Send"
+    }
+  },
+  "footer": {
+    "copyright": "© 2023 Zrinski Photography. All Rights Reserved.",
+    "admin": "Admin Login",
+    "made": "Made by Kristijan Pavlic"
+  }
+}
