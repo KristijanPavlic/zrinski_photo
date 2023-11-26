@@ -13,6 +13,7 @@ export default async function About({
       <div className='container'>
         <h1 className='text-3xl font-bold'>{page.gallery.title}</h1>
         <p className='text-gray-500'>{page.gallery.description}</p>
+        <span>images from database</span>
       </div>
     </section>
   )
