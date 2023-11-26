@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { Locale, i18n } from '@/i18n.config'
 import Header from './components/header'
 
-import Providers from './providers'
+import { Toaster } from 'react-hot-toast'
 
 import { Poppins } from 'next/font/google'
 import Footer from './components/footer'
@@ -31,7 +31,8 @@ export default function RootLayout({
       <body className={poppins.className}>
         <Header lang={params.lang} />
         <main className='flex min-h-[100svh] flex-col'>
-          <Providers>{children}</Providers>
+          <Toaster position='top-right' toastOptions={{ duration: 3000 }} />
+          {children}
         </main>
         <Footer lang={params.lang} />
       </body>

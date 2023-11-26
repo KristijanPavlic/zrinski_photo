@@ -1,138 +1,101 @@
 'use client'
 
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useState } from 'react'
+import { toast } from 'react-hot-toast'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-
-import { ContactFormSchema } from '@/lib/schema'
-import { sendEmail } from '../_actions'
-import { toast } from 'sonner'
-
-export type ContactFormInputs = z.infer<typeof ContactFormSchema>
-
-export default function ContactForm() {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting }
-  } = useForm<ContactFormInputs>({
-    resolver: zodResolver(ContactFormSchema)
+const ContactForm = () => {
+  const [data, setData] = useState({
+    name: '',
+    email: '',
+    message: ''
   })
 
-  const processForm: SubmitHandler<ContactFormInputs> = async data => {
-    const result = await sendEmail(data)
+  const sendEmail = async (e: any) => {
+    e.preventDefault()
 
-    if (result?.success) {
-      console.log({ data: result.data })
-      toast.success('Email sent!')
-      reset()
-      return
+    const response = await fetch('/api/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+
+    if (response.status === 200) {
+      toast.success(`Hey ${data.name}, your message was sent successfully`)
+      clearInputFields()
+      setData({
+        name: '',
+        email: '',
+        message: ''
+      })
     }
 
-    console.log(result?.error)
-    toast.error('Something went wrong!')
+    if (response.status !== 200) {
+      toast.error(
+        'We are sorry, but there seems to be problems with sending your message. Please try again.'
+      )
+    }
+  }
+
+  const clearInputFields = (): void => {
+    // Clear the name, email, and message fields
+    const nameInput = document.getElementById('name') as HTMLInputElement
+    const emailInput = document.getElementById('email') as HTMLInputElement
+    const messageInput = document.getElementById(
+      'message'
+    ) as HTMLTextAreaElement
+
+    nameInput.value = ''
+    emailInput.value = ''
+    messageInput.value = ''
   }
 
   return (
-    <form
-      className='flex w-full flex-col text-left'
-      action={handleSubmit(processForm)}
-    >
-      <label>Name:</label>
+    <form className='flex w-full flex-col text-left' onSubmit={sendEmail}>
+      <label htmlFor='name'>Name:</label>
       <input
         type='text'
-        required
-        maxLength={20}
-        placeholder='Enter your name'
-        className='mt-2 rounded-full border-2 border-black p-3'
-        {...register('name')}
-      />
-      {errors.name?.message && (
-        <p className='ml-1 mt-1 text-sm text-red-400'>{errors.name.message}</p>
-      )}
-      <div className='h-5' />
-      <label>Email:</label>
-      <input
+        name='name'
+        id='name'
         required
         maxLength={100}
-        placeholder='Enter your email'
-        className='mt-2 rounded-full border-2 border-black p-3'
-        {...register('email')}
-      />
-      {errors.email?.message && (
-        <p className='ml-1 mt-1 text-sm text-red-400'>{errors.email.message}</p>
-      )}
-      <div className='h-5' />
-      <label>Message</label>
-      <textarea
-        required
-        rows={5}
-        placeholder='Write your message'
-        className='mt-2 rounded-3xl border-2 border-black p-3'
-        {...register('message')}
-      />
-      {errors.message?.message && (
-        <p className='ml-1 mt-1 text-sm text-red-400'>
-          {errors.message.message}
-        </p>
-      )}
-      <button
-        type='button'
-        disabled={isSubmitting}
-        className='mt-10 rounded-full border-2 border-black px-5 py-3 transition hover:bg-[#BFA53D] hover:text-white'
-      >
-        {isSubmitting ? 'Sending' : 'Send'}
-      </button>
-    </form>
-  )
-}
-
-/* 'use client'
-
-
-export const ContactForm = () => {
-  return (
-    <form
-      className='flex w-full flex-col text-left'
-    >
-      <label htmlFor='senderName'>Name:</label>
-      <input
-        type='text'
-        name='senderName'
-        required
-        maxLength={20}
         placeholder='Enter your name'
-        className='mt-2 rounded-full border-2 border-black p-3'
+        onChange={e => setData({ ...data, name: e.target.value })}
+        className='mt-2 rounded-full border-2 border-gray-500  p-3 focus:border-black'
       />
       <div className='h-5' />
-      <label htmlFor='senderEmail'>Email:</label>
+      <label htmlFor='email'>Email:</label>
       <input
         type='email'
-        name='senderEmail'
+        name='email'
+        id='email'
         required
         maxLength={100}
         placeholder='Enter your email'
-        className='mt-2 rounded-full border-2 border-black p-3'
+        onChange={e => setData({ ...data, email: e.target.value })}
+        className='mt-2 rounded-full border-2 border-gray-500  p-3 focus:border-black'
       />
       <div className='h-5' />
       <label htmlFor='message'>Message</label>
       <textarea
         name='message'
+        id='message'
         required
         maxLength={500}
         rows={5}
         placeholder='Write your message'
-        className='mt-2 rounded-3xl border-2 border-black p-3'
+        onChange={e => setData({ ...data, message: e.target.value })}
+        className='mt-2 rounded-3xl border-2 border-gray-500 p-3 focus:border-black'
       />
       <button
         type='submit'
-        className='mt-10 rounded-full border-2 border-black px-5 py-3 transition hover:bg-[#BFA53D] hover:text-white'
+        className='mt-10 rounded-full border-2 border-gray-500 px-5 py-3 transition hover:border-black hover:bg-[#BFA53D] hover:text-white'
       >
         Send
       </button>
     </form>
   )
 }
- */
+
+export default ContactForm
