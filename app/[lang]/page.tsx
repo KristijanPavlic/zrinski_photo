@@ -22,7 +22,7 @@ export default async function Home({
   const { page } = await getDictionary(lang)
 
   return (
-    <section className='py-10 lg:py-32'>
+    <section className='py-10 lg:py-20'>
       <div className='container flex flex-col justify-between gap-8 lg:flex-row'>
         <div className='flex flex-col pb-10 lg:pb-0'>
           <h1 className='text-xl text-gray-500'>{page.home.title}</h1>
