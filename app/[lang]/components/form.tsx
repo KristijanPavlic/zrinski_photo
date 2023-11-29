@@ -10,8 +10,11 @@ const ContactForm = () => {
     message: ''
   })
 
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const sendEmail = async (e: any) => {
     e.preventDefault()
+    setIsSubmitting(true)
 
     const response = await fetch('/api/send', {
       method: 'POST',
@@ -22,6 +25,7 @@ const ContactForm = () => {
     })
 
     if (response.status === 200) {
+      setIsSubmitting(false)
       toast.success(`Hey ${data.name}, your message was sent successfully`)
       clearInputFields()
       setData({
@@ -32,6 +36,7 @@ const ContactForm = () => {
     }
 
     if (response.status !== 200) {
+      setIsSubmitting(false)
       toast.error(
         'We are sorry, but there seems to be problems with sending your message. Please try again.'
       )
@@ -90,9 +95,10 @@ const ContactForm = () => {
       />
       <button
         type='submit'
+        disabled={isSubmitting}
         className='mt-10 rounded-full border-2 border-gray-500 px-5 py-3 transition hover:border-black hover:bg-[#BFA53D] hover:text-white'
       >
-        Send
+        {isSubmitting ? 'Sending' : 'Send'}
       </button>
     </form>
   )
