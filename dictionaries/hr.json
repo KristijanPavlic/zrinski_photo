@@ -13,8 +13,7 @@
       "btn2": "Kontakt"
     },
     "gallery": {
-      "title": "Galerija",
-      "description": "Ovo je galerija"
+      "title": "Galerija"
     },
     "about": {
       "title": "O nama",
@@ -39,7 +38,7 @@
     }
   },
   "footer": {
-    "copyright": "© 2023 Zrinski Photography. Sva prava pridržana.",
+    "copyright": "Zrinski Photography. Sva prava pridržana.",
     "admin": "Admin Login",
     "made": "Izradio Kristijan Pavlic"
   }

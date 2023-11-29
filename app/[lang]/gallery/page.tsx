@@ -9,11 +9,9 @@ export default async function About({
   const { page } = await getDictionary(lang)
 
   return (
-    <section className='py-24'>
+    <section className='py-10 lg:py-32'>
       <div className='container'>
-        <h1 className='text-3xl font-bold'>{page.gallery.title}</h1>
-        <p className='text-gray-500'>{page.gallery.description}</p>
-        <span>images from database</span>
+        <h1 className=' text-xl font-bold lg:text-3xl'>{page.gallery.title}</h1>
       </div>
     </section>
   )

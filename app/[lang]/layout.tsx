@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang={params.lang}>
       <body className={poppins.className}>
         <Header lang={params.lang} />
-        <main className='flex min-h-[100svh] flex-col'>
+        <main className='min-h-[92svh]'>
           <Toaster position='top-right' toastOptions={{ duration: 3000 }} />
           {children}
         </main>

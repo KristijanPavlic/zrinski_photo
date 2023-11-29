@@ -13,8 +13,7 @@
       "btn2": "Contact Us"
     },
     "gallery": {
-      "title": "Gallery",
-      "description": "This is the gallery page"
+      "title": "Gallery"
     },
     "about": {
       "title": "About",
@@ -39,7 +38,7 @@
     }
   },
   "footer": {
-    "copyright": "© 2023 Zrinski Photography. All Rights Reserved.",
+    "copyright": "Zrinski Photography. All Rights Reserved.",
     "admin": "Admin Login",
     "made": "Made by Kristijan Pavlic"
   }
