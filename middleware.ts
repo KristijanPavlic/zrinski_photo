@@ -9,7 +9,7 @@ import { match as matchLocale } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
 
 export default authMiddleware({
-  publicRoutes: ['/']
+  publicRoutes: ['/en', '/hr']
 })
 
 function getLocale(request: NextRequest): string | undefined {
@@ -31,7 +31,7 @@ export function middleware(request: NextRequest) {
   if (
     pathname === '/sign-in' ||
     pathname === '/sign-up' ||
-    pathname === '/protected'
+    pathname === '/dashboard'
   ) {
     return NextResponse.next()
   }

@@ -29,17 +29,22 @@
       "ouremail": " az.photography.hr@gmail.com",
       "ourphone": " (+385) 98 938 9481",
       "second": "Također nam se možete obratiti putem kontakt obrasca. Potrudit ćemo se odgovoriti na Vašu poruku u najkraćem mogućem roku.",
-      "email": "Email:",
-      "phone": "Mobitel:",
-      "enteremail": "Vaša email adresa",
-      "message": "Poruka:",
+      "name": "Ime",
+      "entername": "Upišite svoje ime",
+      "email": "Email",
+      "enteremail": "Upišite svoju email adresu",
+      "message": "Poruka",
       "entermessage": "Napišite poruku",
-      "btn": "Pošalji"
+      "phone": "Mobitel",
+      "btn1": "Pošalji",
+      "btn2": "Slanje",
+      "success": "Hvala što ste nas kontaktirali. Odgovoriti ćemo Vam u najkraćem mogućem roku.",
+      "failed": "Dogodila se pogreška pri podnošenju obrasca. Molim pokušajte ponovo kasnije."
     }
   },
   "footer": {
     "copyright": "Zrinski Photography. Sva prava pridržana.",
-    "admin": "Admin Login",
+    "admin": "Dashboard",
     "made": "Izradio Kristijan Pavlic"
   }
 }

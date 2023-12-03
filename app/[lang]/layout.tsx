@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Locale, i18n } from '@/i18n.config'
+
 import Header from './components/header'
 
 import { Toaster } from 'react-hot-toast'
@@ -12,7 +13,13 @@ const poppins = Poppins({ subsets: ['latin'], weight: '400' })
 
 export const metadata: Metadata = {
   title: 'Zrinski Photography',
-  description: 'Zrinski Photography'
+  description: 'Zrinski Photography',
+  icons: [
+    {
+      url: './icon.svg',
+      href: './icon.svg'
+    }
+  ]
 }
 
 export async function generateStaticParams() {
@@ -31,7 +38,7 @@ export default function RootLayout({
       <body className={poppins.className}>
         <Header lang={params.lang} />
         <main className='min-h-[92svh]'>
-          <Toaster position='top-right' toastOptions={{ duration: 3000 }} />
+          <Toaster position='top-right' toastOptions={{ duration: 3500 }} />
           {children}
         </main>
         <Footer lang={params.lang} />

@@ -29,17 +29,22 @@
       "ouremail": " az.photography.hr@gmail.com",
       "ourphone": " (+385) 98 938 9481",
       "second": "You can also reach out to us via the contact form. We'll do our best to respond to your message promptly.",
-      "email": "Email:",
-      "phone": "Phone:",
+      "name": "Name",
+      "entername": "Enter your name",
+      "email": "Email",
       "enteremail": "Enter your email address",
-      "message": "Message:",
+      "message": "Message",
       "entermessage": "Enter your message",
-      "btn": "Send"
+      "phone": "Phone",
+      "btn1": "Send",
+      "btn2": "Sending",
+      "success": "Thank you for contacting us. We will be in touch shortly.",
+      "failed": "There was an error submitting your form. Please try again later."
     }
   },
   "footer": {
     "copyright": "Zrinski Photography. All Rights Reserved.",
-    "admin": "Admin Login",
+    "admin": "Dashboard",
     "made": "Made by Kristijan Pavlic"
   }
 }

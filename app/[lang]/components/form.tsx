@@ -3,7 +3,31 @@
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 
-const ContactForm = () => {
+interface ContactFormProps {
+  name: string
+  nameInput: string
+  email: string
+  emailInput: string
+  message: string
+  messageInput: string
+  button1: string
+  button2: string
+  success: string
+  failed: string
+}
+
+const ContactForm: React.FC<ContactFormProps> = ({
+  name,
+  nameInput,
+  email,
+  emailInput,
+  message,
+  messageInput,
+  button1,
+  button2,
+  success,
+  failed
+}) => {
   const [data, setData] = useState({
     name: '',
     email: '',
@@ -26,7 +50,7 @@ const ContactForm = () => {
 
     if (response.status === 200) {
       setIsSubmitting(false)
-      toast.success(`Hey ${data.name}, your message was sent successfully`)
+      toast.success(success)
       clearInputFields()
       setData({
         name: '',
@@ -37,9 +61,7 @@ const ContactForm = () => {
 
     if (response.status !== 200) {
       setIsSubmitting(false)
-      toast.error(
-        'We are sorry, but there seems to be problems with sending your message. Please try again.'
-      )
+      toast.error(failed)
     }
   }
 
@@ -58,38 +80,38 @@ const ContactForm = () => {
 
   return (
     <form className='flex w-full flex-col text-left' onSubmit={sendEmail}>
-      <label htmlFor='name'>Name:</label>
+      <label htmlFor='name'>{name}</label>
       <input
         type='text'
         name='name'
         id='name'
         required
         maxLength={100}
-        placeholder='Enter your name'
+        placeholder={nameInput}
         onChange={e => setData({ ...data, name: e.target.value })}
         className='mt-2 rounded-full border-2 border-gray-500  p-3 focus:border-black'
       />
       <div className='h-5' />
-      <label htmlFor='email'>Email:</label>
+      <label htmlFor='email'>{email}</label>
       <input
         type='email'
         name='email'
         id='email'
         required
         maxLength={100}
-        placeholder='Enter your email'
+        placeholder={emailInput}
         onChange={e => setData({ ...data, email: e.target.value })}
         className='mt-2 rounded-full border-2 border-gray-500  p-3 focus:border-black'
       />
       <div className='h-5' />
-      <label htmlFor='message'>Message</label>
+      <label htmlFor='message'>{message}</label>
       <textarea
         name='message'
         id='message'
         required
         maxLength={500}
         rows={5}
-        placeholder='Write your message'
+        placeholder={messageInput}
         onChange={e => setData({ ...data, message: e.target.value })}
         className='mt-2 rounded-3xl border-2 border-gray-500 p-3 focus:border-black'
       />
@@ -98,7 +120,7 @@ const ContactForm = () => {
         disabled={isSubmitting}
         className='mt-10 rounded-full border-2 border-gray-500 px-5 py-3 transition hover:border-black hover:bg-[#BFA53D] hover:text-white'
       >
-        {isSubmitting ? 'Sending' : 'Send'}
+        {isSubmitting ? button2 : button1}
       </button>
     </form>
   )

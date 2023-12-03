@@ -18,16 +18,37 @@ export default async function About({
             <p className='text-gray-500'>{page.contact.first}</p>
             <p className='text-gray-500'>
               <b>{page.contact.email}</b>
-              {page.contact.ouremail}
+              <a
+                href='mailto:az.photography.hr@gmail.com'
+                className='transition hover:text-[#BFA53D]'
+              >
+                {page.contact.ouremail}
+              </a>
             </p>
             <p className='text-gray-500'>
               <b>{page.contact.phone}</b>
-              {page.contact.ourphone}
+              <a
+                href='tel:+385989389481'
+                className='transition hover:text-[#BFA53D]'
+              >
+                {page.contact.ourphone}
+              </a>
             </p>
             <p className='text-gray-500'>{page.contact.second}</p>
           </div>
           <div className='lg:w-[600px]'>
-            <ContactForm />
+            <ContactForm
+              name={page.contact.name}
+              nameInput={page.contact.entername}
+              email={page.contact.email}
+              emailInput={page.contact.enteremail}
+              message={page.contact.message}
+              messageInput={page.contact.entermessage}
+              button1={page.contact.btn1}
+              button2={page.contact.btn2}
+              success={page.contact.success}
+              failed={page.contact.failed}
+            />
           </div>
         </div>
       </div>
