@@ -8,19 +8,6 @@ import { i18n } from '@/i18n.config'
 import { match as matchLocale } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
 
-export default authMiddleware({
-  publicRoutes: [
-    '/en',
-    '/hr',
-    '/en/about',
-    '/en/gallery',
-    '/en/contact',
-    '/hr/about',
-    '/hr/gallery',
-    '/hr/contact'
-  ]
-})
-
 function getLocale(request: NextRequest): string | undefined {
   const negotiatorHeaders: Record<string, string> = {}
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
@@ -33,7 +20,7 @@ function getLocale(request: NextRequest): string | undefined {
   return locale
 }
 
-export function middleware(request: NextRequest) {
+export function middlewareRedirect(request: NextRequest) {
   const pathname = request.nextUrl.pathname
 
   const pathnameIsMissingLocale = i18n.locales.every(
@@ -52,6 +39,10 @@ export function middleware(request: NextRequest) {
     )
   }
 }
+
+export default authMiddleware({
+  publicRoutes: req => !req.url.includes('/en/dashboard')
+})
 
 export const config = {
   matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)']

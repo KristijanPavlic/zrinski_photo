@@ -41,7 +41,7 @@ export default function RootLayout({
         <Header lang={params.lang} />
         <main className='min-h-[92svh]'>
           <Toaster position='top-right' toastOptions={{ duration: 3500 }} />
-          {children}
+          <ClerkProvider>{children}</ClerkProvider>
         </main>
         <Footer lang={params.lang} />
       </body>
