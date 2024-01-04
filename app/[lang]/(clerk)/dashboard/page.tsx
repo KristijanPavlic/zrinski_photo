@@ -1,11 +1,8 @@
 import {
-  RedirectToSignIn,
-  SignIn,
   SignOutButton,
   UserButton,
   auth
 } from '@clerk/nextjs'
-import { NextResponse } from 'next/server'
 
 export default async function Dashboard() {
   const { userId } = auth()
