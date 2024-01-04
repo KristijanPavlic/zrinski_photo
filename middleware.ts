@@ -1,7 +1,7 @@
 import { authMiddleware } from '@clerk/nextjs'
 
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextFetchEvent, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 
 import { i18n } from '@/i18n.config'
 
@@ -20,31 +20,10 @@ function getLocale(request: NextRequest): string | undefined {
   return locale
 }
 
-/* export function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname
-
-  const pathnameIsMissingLocale = i18n.locales.every(
-    locale => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
-  )
-
-  // Redirect if there is no locale
-  if (pathnameIsMissingLocale) {
-    const locale = getLocale(request)
-
-    return NextResponse.redirect(
-      new URL(
-        `/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`,
-        request.url
-      )
-    )
-  }
-}
-
-export default authMiddleware({
-  publicRoutes: req => !req.url.includes('/en/dashboard')
-}) */
-
-export default function middleware(request: NextRequest) {
+export default function middleware(
+  request: NextRequest,
+  event: NextFetchEvent
+) {
   const pathname = request.nextUrl.pathname
 
   if (
@@ -54,7 +33,7 @@ export default function middleware(request: NextRequest) {
     // Apply authMiddleware for specific routes
     return authMiddleware({
       publicRoutes: req => !req.url.includes('/en/dashboard')
-    })(request)
+    })(request, event)
   }
 
   const pathnameIsMissingLocale = i18n.locales.every(
