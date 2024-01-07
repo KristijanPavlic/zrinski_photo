@@ -13,8 +13,6 @@ import Image from 'next/image'
 import hero1 from '@/public/hero_1.jpg'
 import hero2 from '@/public/hero_2.jpg'
 import hero3 from '@/public/hero_3.jpg'
-import { Suspense } from 'react'
-import Loading from './loading'
 
 export default async function Home({
   params: { lang }
@@ -50,13 +48,11 @@ export default async function Home({
         </div>
         <div className='flex flex-col gap-5 lg:w-1/2 xl:w-1/3'>
           <div>
-            <Suspense fallback={<Loading />}>
-              <Image
-                className='rounded-xl shadow-lg'
-                src={hero1}
-                alt='First hero image'
-              />
-            </Suspense>
+            <Image
+              className='rounded-xl shadow-lg'
+              src={hero1}
+              alt='First hero image'
+            />
           </div>
           <div className='flex gap-5'>
             <div>

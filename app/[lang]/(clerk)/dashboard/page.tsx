@@ -1,25 +1,9 @@
-import {
-  SignIn,
-  SignInButton,
-  SignOutButton,
-  SignedOut,
-  UserButton,
-  auth,
-  redirectToSignIn
-} from '@clerk/nextjs'
+import { UserButton, auth, redirectToSignIn } from '@clerk/nextjs'
 import { NextResponse } from 'next/server'
 
 export default async function Dashboard() {
   const { userId } = auth()
   const adminId = process.env.NEXT_PRIVATE_ADMIN_KEY
-
-  /* return (
-    <div className='flex flex-col justify-center'>
-      <h1>Dashboard</h1>
-      <span>{userId}</span>
-      <UserButton afterSignOutUrl='/en' />
-    </div>
-  ) */
 
   const redirect = () => {
     NextResponse.redirect('/en/sign-in')
@@ -35,11 +19,13 @@ export default async function Dashboard() {
     )
   } else {
     return (
-      <div>
-        <h1>You are not authorized to view this page!</h1>
-        <SignOutButton>
-          <button>Try Signing again!</button>
-        </SignOutButton>
+      <div className='flex flex-col justify-center'>
+        <h1>Access Denied</h1>
+        <p>
+          You do not have permission to access this page. Please sign in as an
+          admin.
+        </p>
+        <UserButton afterSignOutUrl='/en/sign-in' />
       </div>
     )
   }
