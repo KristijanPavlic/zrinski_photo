@@ -11,20 +11,23 @@ export default async function Dashboard() {
 
   if (userId === adminId) {
     return (
-      <div className='flex flex-col justify-center'>
-        <h1>Dashboard</h1>
-        <span>{userId}</span>
-        <UserButton afterSignOutUrl='/en' />
+      <div className='container flex flex-col justify-center'>
+        <h1 className='text-xl font-bold lg:text-3xl'>Dashboard</h1>
+        <div className='mt-5 lg:mt-10'>
+          <span>{userId}</span>
+          <UserButton afterSignOutUrl='/en' />
+        </div>
       </div>
     )
   } else {
     return (
-      <div className='flex flex-col justify-center'>
-        <h1>Access Denied</h1>
-        <p>
-          You do not have permission to access this page. Please sign in as an
-          admin.
-        </p>
+      <div className='container flex flex-col items-center justify-center gap-3'>
+        <h1 className='text-[8rem] font-bold'>403</h1>
+        <h2 className='text-3xl'>Forbidden</h2>
+        <span className='text-center'>
+          You do not have permission to access this page. Please sign in using a
+          different account.
+        </span>
         <UserButton afterSignOutUrl='/en/sign-in' />
       </div>
     )
