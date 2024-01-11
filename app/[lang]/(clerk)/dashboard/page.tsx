@@ -1,9 +1,11 @@
-import { UserButton, auth, redirectToSignIn } from '@clerk/nextjs'
+import { UserButton, auth, currentUser } from '@clerk/nextjs'
 import { NextResponse } from 'next/server'
 
 export default async function Dashboard() {
   const { userId } = auth()
   const adminId = process.env.NEXT_PRIVATE_ADMIN_KEY
+
+  const user = await currentUser()
 
   const redirect = () => {
     NextResponse.redirect('/en/sign-in')
@@ -13,8 +15,8 @@ export default async function Dashboard() {
     return (
       <div className='container flex flex-col justify-center'>
         <h1 className='text-xl font-bold lg:text-3xl'>Dashboard</h1>
+        <h2 className='text-base lg:text-2xl mt-2 lg:mt-5'>Welcome, {user?.firstName}</h2>
         <div className='mt-5 lg:mt-10'>
-          <span>{userId}</span>
           <UserButton afterSignOutUrl='/en' />
         </div>
       </div>
