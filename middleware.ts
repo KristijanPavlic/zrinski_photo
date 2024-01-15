@@ -7,6 +7,7 @@ import { i18n } from '@/i18n.config'
 
 import { match as matchLocale } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
+import { redirect } from 'next/navigation'
 
 function getLocale(request: NextRequest): string | undefined {
   const negotiatorHeaders: Record<string, string> = {}
@@ -40,8 +41,8 @@ export default function middleware(
     locale => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   )
 
-  // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
+    // Redirect if there is no locale
     const locale = getLocale(request)
 
     return NextResponse.redirect(
