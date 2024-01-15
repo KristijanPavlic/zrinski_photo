@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server'
 export default async function Dashboard() {
   const { userId } = auth()
   const adminId = process.env.NEXT_PRIVATE_ADMIN_KEY
+  const antonijaId = process.env.NEXT_PRIVATE_ANTONIJA_KEY
 
   const user = await currentUser()
 
@@ -11,11 +12,13 @@ export default async function Dashboard() {
     NextResponse.redirect('/en/sign-in')
   }
 
-  if (userId === adminId) {
+  if (userId === adminId || antonijaId) {
     return (
       <div className='container flex flex-col justify-center'>
         <h1 className='text-xl font-bold lg:text-3xl'>Dashboard</h1>
-        <h2 className='text-base lg:text-2xl mt-2 lg:mt-5'>Welcome, {user?.firstName}</h2>
+        <h2 className='mt-2 text-base lg:mt-5 lg:text-2xl'>
+          Welcome, {user?.firstName}
+        </h2>
         <div className='mt-5 lg:mt-10'>
           <UserButton afterSignOutUrl='/en' />
         </div>
