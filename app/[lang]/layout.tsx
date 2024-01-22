@@ -9,6 +9,7 @@ import { Toaster } from 'react-hot-toast'
 import { Poppins } from 'next/font/google'
 
 import Footer from './components/footer'
+
 import { ClerkProvider } from '@clerk/nextjs'
 
 const poppins = Poppins({ subsets: ['latin'], weight: '400' })

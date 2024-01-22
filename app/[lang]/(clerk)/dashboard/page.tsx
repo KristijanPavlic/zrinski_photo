@@ -1,5 +1,4 @@
 import { UserButton, auth, currentUser } from '@clerk/nextjs'
-import { NextResponse } from 'next/server'
 
 export default async function Dashboard() {
   const { userId } = auth()
@@ -7,10 +6,6 @@ export default async function Dashboard() {
   const antonijaId = process.env.NEXT_PRIVATE_ANTONIJA_KEY
 
   const user = await currentUser()
-
-  const redirect = () => {
-    NextResponse.redirect('/en/sign-in')
-  }
 
   if (userId === adminId || antonijaId) {
     return (
