@@ -7,7 +7,7 @@ export default async function Dashboard() {
 
   const user = await currentUser()
 
-  if (userId === adminId || antonijaId) {
+  if (userId === adminId || userId === antonijaId) {
     return (
       <div className='container flex flex-col justify-center'>
         <h1 className='text-xl font-bold lg:text-3xl'>Dashboard</h1>
