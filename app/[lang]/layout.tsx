@@ -11,6 +11,8 @@ import { Poppins } from 'next/font/google'
 import Footer from './components/footer'
 
 import { ClerkProvider } from '@clerk/nextjs'
+import { Suspense } from 'react'
+import Loading from './loading'
 
 const poppins = Poppins({ subsets: ['latin'], weight: '400' })
 
@@ -42,7 +44,9 @@ export default function RootLayout({
         <Header lang={params.lang} />
         <main className='min-h-[92svh]'>
           <Toaster position='top-right' toastOptions={{ duration: 3500 }} />
-          <ClerkProvider>{children}</ClerkProvider>
+          <ClerkProvider>
+            <Suspense fallback={<Loading />}>{children}</Suspense>
+          </ClerkProvider>
         </main>
         <Footer lang={params.lang} />
       </body>

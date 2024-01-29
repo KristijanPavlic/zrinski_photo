@@ -1,4 +1,5 @@
 import { UserButton, auth, currentUser } from '@clerk/nextjs'
+import Dropzone from '../../components/Dropzone'
 
 export default async function Dashboard() {
   const { userId } = auth()
@@ -7,7 +8,7 @@ export default async function Dashboard() {
 
   const user = await currentUser()
 
-  if (userId === adminId || antonijaId) {
+  if (userId === adminId || userId === antonijaId) {
     return (
       <div className='container flex flex-col justify-center'>
         <h1 className='text-xl font-bold lg:text-3xl'>Dashboard</h1>
@@ -17,6 +18,12 @@ export default async function Dashboard() {
         <div className='mt-5 lg:mt-10'>
           <UserButton afterSignOutUrl='/en' />
         </div>
+        <section className='py-24'>
+          <div className='container'>
+            <h1 className='text-3xl font-bold'>Upload Files</h1>
+            <Dropzone className='mt-10 border border-neutral-200 p-16' />
+          </div>
+        </section>
       </div>
     )
   } else {

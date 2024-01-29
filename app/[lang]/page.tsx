@@ -3,12 +3,6 @@ import { getDictionary } from '@/lib/dictionary'
 
 import Link from 'next/link'
 
-import localFont from 'next/font/local'
-const greatVibes = localFont({
-  src: '../../font/GreatVibes-Regular.woff2',
-  variable: '--font-great-vibes'
-})
-
 import Image from 'next/image'
 import hero1 from '@/public/hero_1.jpg'
 import hero2 from '@/public/hero_2.jpg'
@@ -27,7 +21,7 @@ export default async function Home({
         <div className='flex flex-col pb-10 lg:pb-0'>
           <h1 className='text-xl text-gray-500'>{page.home.title}</h1>
           <p
-            className={`font-serif text-3xl font-bold italic ${greatVibes.variable} max-w-md pt-5 leading-[50px] lg:max-w-[500px] lg:text-4xl lg:leading-[72px] xl:max-w-[700px] xl:text-5xl  xl:leading-[92px]`}
+            className={`font-serif text-3xl font-bold italic max-w-md pt-5 leading-[50px] lg:max-w-[500px] lg:text-4xl lg:leading-[72px] xl:max-w-[700px] xl:text-5xl  xl:leading-[92px] xl:pt-20`}
           >
             {page.home.description}
           </p>
