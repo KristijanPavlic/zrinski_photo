@@ -13,7 +13,12 @@
       "btn2": "Kontakt"
     },
     "gallery": {
-      "title": "Galerija"
+      "title": "Galerija",
+      "category1": "Vjenčanja",
+      "category2": "Krštenja",
+      "category3": "Cake smash",
+      "category4": "Obitelj - djeca - trudnoća",
+      "category5": "Božić"
     },
     "about": {
       "title": "O nama",

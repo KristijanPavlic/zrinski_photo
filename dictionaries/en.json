@@ -13,7 +13,12 @@
       "btn2": "Contact Us"
     },
     "gallery": {
-      "title": "Gallery"
+      "title": "Gallery",
+      "category1": "Weddings",
+      "category2": "Christening",
+      "category3": "Cake smash",
+      "category4": "Family - kids - pregnancy",
+      "category5": "Christmas"
     },
     "about": {
       "title": "About",

@@ -40,16 +40,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang={params.lang}>
-      <body className={poppins.className}>
-        <Header lang={params.lang} />
-        <main className='min-h-[92svh]'>
-          <Toaster position='top-right' toastOptions={{ duration: 3500 }} />
-          <ClerkProvider>
-            <Suspense fallback={<Loading />}>{children}</Suspense>
-          </ClerkProvider>
-        </main>
-        <Footer lang={params.lang} />
-      </body>
+      <Suspense fallback={<Loading />}>
+        <body className={poppins.className}>
+          <Header lang={params.lang} />
+          <main className='min-h-[92svh]'>
+            <Toaster position='top-right' toastOptions={{ duration: 3500 }} />
+            <ClerkProvider>
+              <Suspense fallback={<Loading />}>{children}</Suspense>
+            </ClerkProvider>
+          </main>
+          <Footer lang={params.lang} />
+        </body>
+      </Suspense>
     </html>
   )
 }

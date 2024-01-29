@@ -21,7 +21,7 @@ export default async function Home({
         <div className='flex flex-col pb-10 lg:pb-0'>
           <h1 className='text-xl text-gray-500'>{page.home.title}</h1>
           <p
-            className={`font-serif text-3xl font-bold italic max-w-md pt-5 leading-[50px] lg:max-w-[500px] lg:text-4xl lg:leading-[72px] xl:max-w-[700px] xl:text-5xl  xl:leading-[92px] xl:pt-20`}
+            className={`max-w-md pt-5 font-serif text-3xl font-bold italic leading-[50px] lg:max-w-[500px] lg:text-4xl lg:leading-[72px] xl:max-w-[700px] xl:pt-20  xl:text-5xl xl:leading-[92px]`}
           >
             {page.home.description}
           </p>
