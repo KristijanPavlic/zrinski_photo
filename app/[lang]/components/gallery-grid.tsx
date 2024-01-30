@@ -1,0 +1,54 @@
+'use client'
+
+import { useState } from 'react'
+import Image from 'next/image'
+import cover from '@/public/gallery_cover.jpg'
+
+export default function GalleryGrid() {
+  const totalImages = 12
+  const imagesToShowInitially = 6
+
+  const [visibleImages, setVisibleImages] = useState(imagesToShowInitially)
+  const [showMore, setShowMore] = useState(true)
+
+  const toggleImages = () => {
+    if (showMore) {
+      setVisibleImages(totalImages)
+    } else {
+      setVisibleImages(imagesToShowInitially)
+    }
+    setShowMore(!showMore)
+  }
+
+  const imageIndices = Array.from(
+    { length: visibleImages },
+    (_, index) => index
+  )
+
+  return (
+    <>
+      <div className='mt-5 grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:mt-10 xl:grid-cols-3'>
+        {imageIndices.map(el => (
+          <div
+            className='w-full transform overflow-hidden rounded-xl shadow-lg transition-transform duration-300 ease-in-out hover:scale-105'
+            key={el}
+          >
+            <Image
+              src={cover}
+              alt='Gallery cover'
+              className='rounded-[10px] bg-cover'
+            />
+          </div>
+        ))}
+      </div>
+      {totalImages > imagesToShowInitially && (
+        <h3
+          className='m-auto w-fit cursor-pointer text-center text-blue-500 transition-colors duration-300 hover:text-blue-700'
+          onClick={toggleImages}
+        >
+          {showMore ? 'View More' : 'View Less'}
+        </h3>
+      )}
+    </>
+  )
+}

@@ -1,3 +1,4 @@
+import GalleryGrid from '@/app/[lang]/components/gallery-grid'
 import { Locale } from '@/i18n.config'
 import { getDictionary } from '@/lib/dictionary'
 import Link from 'next/link'
@@ -25,14 +26,7 @@ export default async function Weddings({
             </h1>
           </Link>
         </div>
-        <div className='grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 '>
-          <div className='mt-5'>image1</div>
-          <div className='mt-5'>image2</div>
-          <div className='mt-5'>image3</div>
-          <div className='mt-5'>image4</div>
-          <div className='mt-5'>image5</div>
-          <div className='mt-5'>image6</div>
-        </div>
+        <GalleryGrid />
       </div>
     </section>
   )

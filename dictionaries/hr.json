@@ -18,7 +18,9 @@
       "category2": "Krštenja",
       "category3": "Cake smash",
       "category4": "Obitelj - djeca - trudnoća",
-      "category5": "Božić"
+      "category5": "Božić",
+      "moreBtn": "Vidi više",
+      "lessBtn": "Vidi manje"
     },
     "about": {
       "title": "O nama",

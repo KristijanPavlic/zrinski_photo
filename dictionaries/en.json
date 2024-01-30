@@ -18,7 +18,9 @@
       "category2": "Christening",
       "category3": "Cake smash",
       "category4": "Family - kids - pregnancy",
-      "category5": "Christmas"
+      "category5": "Christmas",
+      "moreBtn": "View More",
+      "lessBtn": "View Less"
     },
     "about": {
       "title": "About",
