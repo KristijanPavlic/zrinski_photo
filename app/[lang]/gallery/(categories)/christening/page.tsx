@@ -26,7 +26,10 @@ export default async function Christening({
             </h1>
           </Link>
         </div>
-        <GalleryGrid />
+        <GalleryGrid
+          button1={page.gallery.moreBtn}
+          button2={page.gallery.lessBtn}
+        />
       </div>
     </section>
   )

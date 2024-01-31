@@ -27,6 +27,13 @@ export default function middleware(
   const pathname = request.nextUrl.pathname
 
   if (
+    pathname.startsWith('/hr/sign-in') ||
+    pathname.startsWith('/hr/dashboard')
+  ) {
+    return NextResponse.redirect(new URL(`/en/dashboard`, request.url))
+  }
+
+  if (
     pathname.startsWith('/en/sign-in') ||
     pathname.startsWith('/en/dashboard')
   ) {
