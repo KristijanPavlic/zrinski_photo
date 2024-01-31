@@ -4,7 +4,12 @@ import { useState } from 'react'
 import Image from 'next/image'
 import cover from '@/public/gallery_cover.jpg'
 
-export default function GalleryGrid() {
+interface GalleryGridProps {
+  button1: string
+  button2: string
+}
+
+const GalleryGrid: React.FC<GalleryGridProps> = ({ button1, button2 }) => {
   const totalImages = 12
   const imagesToShowInitially = 6
 
@@ -43,12 +48,14 @@ export default function GalleryGrid() {
       </div>
       {totalImages > imagesToShowInitially && (
         <h3
-          className='m-auto w-fit cursor-pointer text-center text-blue-500 transition-colors duration-300 hover:text-blue-700'
+          className='m-auto mt-6 w-fit cursor-pointer text-center transition hover:text-[#BFA53D]'
           onClick={toggleImages}
         >
-          {showMore ? 'View More' : 'View Less'}
+          {showMore ? button1 : button2}
         </h3>
       )}
     </>
   )
 }
+
+export default GalleryGrid

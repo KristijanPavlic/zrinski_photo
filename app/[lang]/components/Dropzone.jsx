@@ -30,7 +30,7 @@ const Dropzone = ({ className }) => {
     accept: {
       'image/*': []
     },
-    maxSize: 1024 * 1024 * 10, // 10MB
+    maxSize: 1024 * 1024 * 5, // 5MB
     maxFiles: 100,
     onDrop
   })
@@ -114,7 +114,7 @@ const Dropzone = ({ className }) => {
           </button>
           <button
             type='submit'
-            className='ml-auto mt-1 rounded-md border border-purple-400 px-3 text-[12px] font-bold uppercase tracking-wider text-stone-500 transition-colors hover:bg-purple-400 hover:text-white'
+            className='ml-auto mt-1 rounded-md border border-[#BFA53D] px-3 text-[12px] font-bold uppercase tracking-wider text-stone-500 transition-colors hover:bg-[#BFA53D] hover:text-white'
           >
             Upload to Cloudinary
           </button>
