@@ -119,6 +119,7 @@ export default function Header({ lang }: { lang: Locale }) {
                 </li>
                 <LocaleSwitcher />
               </ul>
+              {/* {showMenu ? document.onclick(closeMenuOnClick) : ''} */}
             </nav>
           </div>
         </div>
