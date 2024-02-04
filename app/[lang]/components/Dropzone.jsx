@@ -5,10 +5,12 @@ import { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { ArrowUpTrayIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import { getSignature, saveToDatabase } from '../_action'
+import { toast } from 'react-hot-toast'
 
 const Dropzone = ({ className }) => {
   const [files, setFiles] = useState([])
   const [rejected, setRejected] = useState([])
+  const [alertMessage, setAlertMessage] = useState(null)
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
@@ -70,17 +72,31 @@ const Dropzone = ({ className }) => {
     formData.append('folder', 'next')
 
     const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL
-    const data = await fetch(endpoint, {
-      method: 'POST',
-      body: formData
-    }).then(res => res.json())
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        body: formData
+      })
 
-    // write to database using server actions
-    await saveToDatabase({
-      version: data?.version,
-      signature: data?.signature,
-      public_id: data?.public_id
-    })
+      if (response.ok) {
+        const data = await response.json()
+
+        // write to database using server actions
+        await saveToDatabase({
+          version: data?.version,
+          signature: data?.signature,
+          public_id: data?.public_id
+        })
+
+        setFiles([])
+        toast.success('Upload successful!')
+      } else {
+        toast.error('Upload failed. Please try again.')
+      }
+    } catch (error) {
+      console.error('Error during upload:', error)
+      toast.error('An error occurred during upload.')
+    }
   }
 
   return (
@@ -100,6 +116,15 @@ const Dropzone = ({ className }) => {
           )}
         </div>
       </div>
+
+      {/* Alert Message */}
+      {alertMessage && (
+        <div
+          className={`mt-4 p-2 text-center ${alertMessage.includes('failed') ? 'text-red-500' : 'text-green-500'}`}
+        >
+          {alertMessage}
+        </div>
+      )}
 
       {/* Preview */}
       <section className='mt-10'>
