@@ -13,3 +13,7 @@
     user-select: none;
     outline: none !important;
 }
+
+*::selection {
+    background-color: #BFA53D;
+}
