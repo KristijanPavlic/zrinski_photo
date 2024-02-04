@@ -4,6 +4,8 @@ import { useState } from 'react'
 import Image from 'next/image'
 import cover from '@/public/gallery_cover.jpg'
 
+import { CldImage } from 'next-cloudinary'
+
 interface GalleryGridProps {
   button1: string
   button2: string
@@ -38,11 +40,20 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({ button1, button2 }) => {
             className='w-full transform overflow-hidden rounded-xl shadow-lg transition-transform duration-300 ease-in-out hover:scale-105'
             key={el}
           >
-            <Image
+            <CldImage
+              src='https://res.cloudinary.com/dfwfplo4c/image/upload/v1706222043/next/onhuxzogeua1rfkqoepu.png'
+              alt='image'
+              width='1000'
+              height='700'
+              sizes='100%'
+              className='rounded-[10px] bg-cover'
+            />
+
+            {/* <Image
               src={cover}
               alt='Gallery cover'
               className='rounded-[10px] bg-cover'
-            />
+            /> */}
           </div>
         ))}
       </div>
