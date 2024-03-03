@@ -22,6 +22,8 @@
     "cloudinary": "^1.41.3",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
+    "fs-extra": "^11.2.0",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.311.0",
     "negotiator": "^0.6.3",
     "next": "^14.0.4",

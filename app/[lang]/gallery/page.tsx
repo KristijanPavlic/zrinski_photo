@@ -1,9 +1,18 @@
 import { Locale } from '@/i18n.config'
 import { getDictionary } from '@/lib/dictionary'
 
-import Image from 'next/image'
-import cover from '@/public/gallery_cover.jpg'
 import Link from 'next/link'
+
+import Image, { StaticImageData } from 'next/image'
+import weddingImage from '@/public/weddings.jpg'
+import christeningImage from '@/public/baptism.avif'
+import cakeSmashImage from '@/public/cake_smash.jpg'
+import familyImage from '@/public/family.avif'
+import christmasImage from '@/public/christmas.avif'
+
+type CategoryImages = {
+  [key: string]: StaticImageData
+}
 
 export default async function About({
   params: { lang }
@@ -28,6 +37,14 @@ export default async function About({
     'Božić'
   ]
 
+  const categoryImages: CategoryImages = {
+    Weddings: weddingImage,
+    Christening: christeningImage,
+    'Cake smash': cakeSmashImage,
+    'Family - kids - pregnancy': familyImage,
+    Christmas: christmasImage
+  }
+
   return (
     <section className='py-10 lg:py-32'>
       <div className='container'>
@@ -44,7 +61,7 @@ export default async function About({
                 </h2>
                 <div className='w-full overflow-hidden rounded-xl shadow-lg hover:shadow-none'>
                   <Image
-                    src={cover}
+                    src={categoryImages[category]}
                     alt='Gallery cover'
                     className='rounded-[10px] bg-cover duration-200 ease-in-out hover:scale-125 hover:blur-sm'
                   />

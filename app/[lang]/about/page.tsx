@@ -22,7 +22,7 @@ export default async function About({
             <p className='text-gray-500'>{page.about.description.third}</p>
           </div>
           <div>
-            <div className='relative'>
+            <div className='relative max-w-fit'>
               <Image
                 className='w-full rounded-xl shadow-lg sm:w-auto'
                 src={portrait}
@@ -30,7 +30,9 @@ export default async function About({
                 width={238}
                 height={356}
               />
-              <span className='absolute text-gray-400 italic'>Antonija Zrinski</span>
+              <h3 className='absolute bottom-0 w-fit rounded-b-xl bg-black pb-1 pl-4 pt-1 text-white'>
+                Antonija Zrinski
+              </h3>
             </div>
           </div>
         </div>
