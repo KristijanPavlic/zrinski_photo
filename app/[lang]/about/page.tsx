@@ -30,7 +30,7 @@ export default async function About({
                 width={238}
                 height={356}
               />
-              <h3 className='absolute bottom-0 w-fit rounded-b-xl bg-black pb-1 pl-4 pt-1 text-white'>
+              <h3 className='absolute bottom-0 w-full rounded-b-xl bg-black pb-1 pl-4 pt-1 text-white'>
                 Antonija Zrinski
               </h3>
             </div>
