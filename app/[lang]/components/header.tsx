@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Locale } from '@/i18n.config'
@@ -16,6 +17,8 @@ export default function Header({ lang }: { lang: Locale }) {
     contact: string
   } | null>(null)
   const [showMenu, setShowMenu] = useState(false)
+
+  const pathName = usePathname()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,16 +68,24 @@ export default function Header({ lang }: { lang: Locale }) {
 
           <div className='hidden md:block'>
             <ul className='desktop-nav flex gap-x-8'>
-              <li className='w-fit transition hover:text-[#BFA53D]'>
+              <li
+                className={`w-fit transition hover:text-[#BFA53D] ${pathName.length < 4 ? 'text-[#BFA53D]' : ''}`}
+              >
                 <Link href={`/${lang}`}>{navigation?.home}</Link>
               </li>
-              <li className='w-fit transition hover:text-[#BFA53D]'>
+              <li
+                className={`w-fit transition hover:text-[#BFA53D] ${pathName.includes('/gallery') ? 'text-[#BFA53D]' : ''}`}
+              >
                 <Link href={`/${lang}/gallery`}>{navigation?.gallery}</Link>
               </li>
-              <li className='w-fit transition hover:text-[#BFA53D]'>
+              <li
+                className={`w-fit transition hover:text-[#BFA53D] ${pathName.includes('/about') ? 'text-[#BFA53D]' : ''}`}
+              >
                 <Link href={`/${lang}/about`}>{navigation?.about}</Link>
               </li>
-              <li className='w-fit transition hover:text-[#BFA53D]'>
+              <li
+                className={`w-fit transition hover:text-[#BFA53D] ${pathName.includes('/contact') ? 'text-[#BFA53D]' : ''}`}
+              >
                 <Link href={`/${lang}/contact`}>{navigation?.contact}</Link>
               </li>
               <LocaleSwitcher />
@@ -97,22 +108,30 @@ export default function Header({ lang }: { lang: Locale }) {
               }`}
             >
               <ul className='flex h-full flex-col justify-center gap-y-2'>
-                <li className='w-fit transition hover:text-[#BFA53D]'>
+                <li
+                  className={`w-fit transition hover:text-[#BFA53D] ${pathName.length < 4 ? 'text-[#BFA53D]' : ''}`}
+                >
                   <Link href={`/${lang}`} onClick={closeMenuOnClick}>
                     {navigation?.home}
                   </Link>
                 </li>
-                <li className='w-fit transition hover:text-[#BFA53D]'>
+                <li
+                  className={`w-fit transition hover:text-[#BFA53D] ${pathName.includes('/gallery') ? 'text-[#BFA53D]' : ''}`}
+                >
                   <Link href={`/${lang}/gallery`} onClick={closeMenuOnClick}>
                     {navigation?.gallery}
                   </Link>
                 </li>
-                <li className='w-fit transition hover:text-[#BFA53D]'>
+                <li
+                  className={`w-fit transition hover:text-[#BFA53D] ${pathName.includes('/about') ? 'text-[#BFA53D]' : ''}`}
+                >
                   <Link href={`/${lang}/about`} onClick={closeMenuOnClick}>
                     {navigation?.about}
                   </Link>
                 </li>
-                <li className='w-fit transition hover:text-[#BFA53D]'>
+                <li
+                  className={`w-fit transition hover:text-[#BFA53D] ${pathName.includes('/contact') ? 'text-[#BFA53D]' : ''}`}
+                >
                   <Link href={`/${lang}/contact`} onClick={closeMenuOnClick}>
                     {navigation?.contact}
                   </Link>

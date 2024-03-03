@@ -20,10 +20,7 @@ export default function LocaleSwitcher() {
       {i18n.locales.map(locale => {
         return (
           <li key={locale} className='transition hover:text-[#BFA53D]'>
-            {locale === 'hr' &&
-            (pathName.includes('/sign-in') ||
-              pathName.includes('/sign-up') ||
-              pathName.includes('/dashboard')) ? (
+            {pathName.includes('/dashboard') || pathName.includes(locale) ? (
               <div></div>
             ) : (
               <Link href={redirectedPathName(locale)}>
