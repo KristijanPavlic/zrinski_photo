@@ -10,23 +10,30 @@ interface GalleryGridProps {
 
 const GalleryGrid: React.FC<GalleryGridProps> = ({ button1, button2 }) => {
   const [images, setImages] = useState([])
+  const [refreshCount, setRefreshCount] = useState(0)
+
+  const fetchImages = async () => {
+    const response = await fetch('../api/cloudinary')
+    if (response.ok) {
+      const data = await response.json()
+      setImages(data)
+    } else {
+      console.error('Error fetching images:', response.status)
+    }
+  }
 
   useEffect(() => {
-    const fetchImages = async () => {
-      const response = await fetch('../api/cloudinary')
-      if (response.ok) {
-        const data = await response.json()
-        setImages(data)
-      } else {
-        console.error('Error fetching images:', response.status)
-      }
-    }
+    fetchImages() // Fetch initially
 
-    fetchImages()
-  }, [images])
+    const intervalId = setInterval(() => {
+      console.log('Fetching updated images...')
+      setRefreshCount(refreshCount => refreshCount + 1) // Trigger re-fetch
+    }, 5000) // Example polling every 5 seconds
+
+    return () => clearInterval(intervalId) // Cleanup on unmount
+  }, [refreshCount]) // Trigger the effect when refreshCount changes
 
   /* const totalImages = images.length */
-  console.log(images)
 
   return (
     <>
