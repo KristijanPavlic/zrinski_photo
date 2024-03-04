@@ -27,8 +27,8 @@ export default async function Family({
           </Link>
         </div>
         <GalleryGrid
-          button1={page.gallery.moreBtn}
-          button2={page.gallery.lessBtn}
+          /* button1={page.gallery.moreBtn}
+          button2={page.gallery.lessBtn} */
         />
       </div>
     </section>
