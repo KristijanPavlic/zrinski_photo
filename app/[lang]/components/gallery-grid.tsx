@@ -8,7 +8,7 @@ interface GalleryGridProps {
   button2: string
 }
 
-const GalleryGrid: React.FC<GalleryGridProps> = ({ button1, button2 }) => {
+export default function GalleryGrid() {
   const [images, setImages] = useState([])
   const [refreshCount, setRefreshCount] = useState(0)
 
@@ -65,4 +65,4 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({ button1, button2 }) => {
   )
 }
 
-export default GalleryGrid
+/* export default GalleryGrid */
