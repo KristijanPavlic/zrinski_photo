@@ -1,6 +1,4 @@
-/* 'use client' */
-
-import { NextResponse } from 'next/server'
+'use client'
 
 import { useState } from 'react'
 import { CldImage } from 'next-cloudinary'
@@ -9,12 +7,11 @@ interface GalleryGridProps {
   button2: string
 }
 
-export default async function GalleryGrid(/* { button1, button2 } */) {
-  /*
+const GalleryGrid: React.FC<GalleryGridProps> = ({ button1, button2 }) => {
   const totalImages = 12
   const imagesToShowInitially = 6
 
-   const [visibleImages, setVisibleImages] = useState(imagesToShowInitially)
+  const [visibleImages, setVisibleImages] = useState(imagesToShowInitially)
   const [showMore, setShowMore] = useState(true)
 
   const toggleImages = () => {
@@ -29,20 +26,12 @@ export default async function GalleryGrid(/* { button1, button2 } */) {
   const imageIndices = Array.from(
     { length: visibleImages },
     (_, index) => index
-  ) */
+  )
 
-  /* const response = await fetch('../api/cloudinary', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
- */
   return (
     <>
       <div className='mt-5 grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:mt-10 xl:grid-cols-3'>
-        {/* {imageIndices.map(el => (
+        {imageIndices.map(el => (
           <div
             className='w-full transform overflow-hidden rounded-xl shadow-lg transition-transform duration-300 ease-in-out hover:scale-105'
             key={el}
@@ -56,18 +45,18 @@ export default async function GalleryGrid(/* { button1, button2 } */) {
               className='rounded-[10px] bg-cover'
             />
           </div>
-        ))} */}
+        ))}
       </div>
-      {/* {totalImages > imagesToShowInitially && (
+      {totalImages > imagesToShowInitially && (
         <h3
           className='m-auto mt-6 w-fit cursor-pointer text-center transition hover:text-[#BFA53D]'
           onClick={toggleImages}
         >
           {showMore ? button1 : button2}
         </h3>
-      )} */}
+      )}
     </>
   )
 }
 
-/* export default GalleryGrid */
+export default GalleryGrid

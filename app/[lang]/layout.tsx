@@ -1,4 +1,7 @@
 import './globals.css'
+
+import { SpeedInsights } from '@vercel/speed-insights/next'
+
 import type { Metadata } from 'next'
 import { Locale, i18n } from '@/i18n.config'
 
@@ -41,6 +44,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang={params.lang}>
+      <SpeedInsights />
       <Suspense fallback={<Loading />}>
         <body className={poppins.className}>
           <Header lang={params.lang} />
