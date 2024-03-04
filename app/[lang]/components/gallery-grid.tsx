@@ -23,9 +23,10 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({ button1, button2 }) => {
     }
 
     fetchImages()
-  }, [])
+  }, [images])
 
   /* const totalImages = images.length */
+  console.log(images)
 
   return (
     <>

@@ -5,9 +5,9 @@ interface CloudinaryImageResource {
 
 export async function GET() {
   try {
-    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUDNAME // Replace with your cloud name
-    const apiKey = process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY // Replace with your API key
-    const apiSecret = process.env.CLOUDINARY_API_SECRET // Replace with your API secret
+    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUDNAME
+    const apiKey = process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY
+    const apiSecret = process.env.CLOUDINARY_API_SECRET
 
     const authString = btoa(`${apiKey}:${apiSecret}`)
     const url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/image`
