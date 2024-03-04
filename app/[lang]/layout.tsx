@@ -1,6 +1,7 @@
 import './globals.css'
 
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Analytics } from '@vercel/analytics/react'
 
 import type { Metadata } from 'next'
 import { Locale, i18n } from '@/i18n.config'
@@ -57,6 +58,7 @@ export default function RootLayout({
           <Footer lang={params.lang} />
         </body>
       </Suspense>
+      <Analytics />
     </html>
   )
 }
