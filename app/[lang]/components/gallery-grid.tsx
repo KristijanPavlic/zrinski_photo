@@ -14,6 +14,7 @@ export default function GalleryGrid() {
 
   const fetchImages = async () => {
     const response = await fetch('../api/cloudinary')
+
     if (response.ok) {
       const data = await response.json()
       setImages(data)
@@ -26,7 +27,6 @@ export default function GalleryGrid() {
     fetchImages() // Fetch initially
 
     const intervalId = setInterval(() => {
-      console.log('Fetching updated images...')
       setRefreshCount(refreshCount => refreshCount + 1) // Trigger re-fetch
     }, 5000) // Example polling every 5 seconds
 

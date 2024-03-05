@@ -6,12 +6,12 @@ interface CloudinaryImageResource {
 export async function GET() {
   try {
     const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUDNAME
-    const uploadURL = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL
+
     const apiKey = process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY
     const apiSecret = process.env.CLOUDINARY_API_SECRET
 
     const authString = btoa(`${apiKey}:${apiSecret}`)
-    const url = `https://api.cloudinary.com/v1_1/dfwfplo4c/resources/image`
+    const url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/image`
 
     const response = await fetch(url, {
       headers: {
