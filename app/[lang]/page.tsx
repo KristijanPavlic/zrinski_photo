@@ -45,6 +45,8 @@ export default async function Home({
             <Image
               className='rounded-xl shadow-lg'
               src={hero1}
+              width={800}
+              height={500}
               alt='First hero image'
             />
           </div>
@@ -53,6 +55,8 @@ export default async function Home({
               <Image
                 className='rounded-xl shadow-lg'
                 src={hero2}
+                width={400}
+                height={200}
                 alt='Second hero image'
               />
             </div>
@@ -60,6 +64,8 @@ export default async function Home({
               <Image
                 className='rounded-xl shadow-lg'
                 src={hero3}
+                width={400}
+                height={200}
                 alt='Third hero image'
               />
             </div>

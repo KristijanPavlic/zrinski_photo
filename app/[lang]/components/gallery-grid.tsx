@@ -45,8 +45,8 @@ export default function GalleryGrid() {
           >
             <CldImage
               src={image}
-              width={500}
-              height={300}
+              width={800}
+              height={460}
               alt='gallery grid image'
             />
           </div>
