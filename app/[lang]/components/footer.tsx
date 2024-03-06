@@ -3,7 +3,8 @@ import { getDictionary } from '@/lib/dictionary'
 import Link from 'next/link'
 
 export default async function Footer({ lang }: { lang: Locale }) {
-  const { footer } = await getDictionary(lang)
+  const dictionary = await getDictionary(lang)
+  const { footer } = dictionary
 
   const currentYear = new Date().getFullYear()
 

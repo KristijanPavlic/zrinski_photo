@@ -13,7 +13,8 @@ export default async function Home({
 }: {
   params: { lang: Locale }
 }) {
-  const { page } = await getDictionary(lang)
+  const dictionary = await getDictionary(lang)
+  const { page } = dictionary
 
   return (
     <section className='py-10 lg:py-20'>
