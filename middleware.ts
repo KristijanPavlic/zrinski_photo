@@ -39,8 +39,12 @@ export default function middleware(
   ) {
     // Apply authMiddleware for specific routes
     return authMiddleware({
-      publicRoutes: req =>
-        !req.url.includes('/en/dashboard')
+      publicRoutes: req => !req.url.includes('/en/dashboard'),
+      ignoredRoutes: [
+        '/((?!api|trpc))(_next.*|.+.[w]+$)',
+        '/en/sign-in',
+        '/en/sign-up'
+      ]
     })(request, event)
   }
 
