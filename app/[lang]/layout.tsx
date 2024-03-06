@@ -22,7 +22,7 @@ const poppins = Poppins({ subsets: ['latin'], weight: '400' })
 
 export const metadata: Metadata = {
   title: 'Zrinski Photography',
-  description: 'Zrinski Photography Website',
+  description: 'Zrinski Photography',
   authors: { name: 'Kristijan Pavlic Tumpa' },
   icons: [
     {
