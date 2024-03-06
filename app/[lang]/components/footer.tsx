@@ -17,7 +17,7 @@ export default async function Footer({ lang }: { lang: Locale }) {
           </span>
           <Link
             className='transition hover:text-[#BFA53D]'
-            href={`/en/sign-in`}
+            href={`/en/dashboard`}
             aria-label='Link to admin page'
           >
             {footer.admin}
