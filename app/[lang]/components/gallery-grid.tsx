@@ -13,7 +13,9 @@ const GalleryGrid = () => {
 
   useEffect(() => {
     const fetchImages = async () => {
-      const response = await fetch('/api/cloudinary')
+      const response = await fetch(
+        'https://www.zrinski-photo.com/en/api/cloudinary'
+      )
 
       if (response.ok) {
         const data = await response.json()
