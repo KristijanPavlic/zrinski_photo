@@ -3,42 +3,34 @@
 import { useState, useEffect } from 'react'
 import { CldImage } from 'next-cloudinary'
 
-interface GalleryGridProps {
+/* interface GalleryGridProps {
   button1: string
   button2: string
-}
+} */
 
-export default function GalleryGrid() {
+const GalleryGrid = () => {
   const [images, setImages] = useState([])
-  const [refreshCount, setRefreshCount] = useState(0)
-
-  const fetchImages = async () => {
-    const response = await fetch('/api/cloudinary')
-
-    if (response.ok) {
-      const data = await response.json()
-      setImages(data)
-    } else {
-      console.error('Error fetching images:', response.status)
-    }
-  }
 
   useEffect(() => {
-    fetchImages() // Fetch initially
+    const fetchImages = async () => {
+      const response = await fetch('/api/cloudinary')
 
-    const intervalId = setInterval(() => {
-      setRefreshCount(refreshCount => refreshCount + 1) // Trigger re-fetch
-    }, 5000) // Example polling every 5 seconds
+      if (response.ok) {
+        const data = await response.json()
 
-    return () => clearInterval(intervalId) // Cleanup on unmount
-  }, [refreshCount]) // Trigger the effect when refreshCount changes
+        setImages(data)
+      } else {
+        console.error('Error fetching images:', response.status)
+      }
+    }
 
-  /* const totalImages = images.length */
+    fetchImages()
+  }, [])
 
   return (
     <>
       <div className='mt-5 grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:mt-10 xl:grid-cols-3'>
-        {images.map(image => (
+        {images?.map(image => (
           <div
             key={image}
             className='w-full transform overflow-hidden rounded-xl shadow-lg transition-transform duration-300 ease-in-out hover:scale-105'
@@ -65,4 +57,4 @@ export default function GalleryGrid() {
   )
 }
 
-/* export default GalleryGrid */
+export default GalleryGrid
