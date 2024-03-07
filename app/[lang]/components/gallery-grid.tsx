@@ -13,7 +13,7 @@ export default function GalleryGrid() {
   const [refreshCount, setRefreshCount] = useState(0)
 
   const fetchImages = async () => {
-    const response = await fetch('../api/cloudinary')
+    const response = await fetch('/api/cloudinary')
 
     if (response.ok) {
       const data = await response.json()
