@@ -1,7 +1,7 @@
 import { Locale } from '@/i18n.config'
 import { getDictionary } from '@/lib/dictionary'
-import Image from 'next/image'
 
+import Image from 'next/image'
 import portrait from '@/public/portrait.jpg'
 
 export default async function About({
@@ -23,13 +23,13 @@ export default async function About({
           </div>
           <div>
             <div className='relative max-w-fit'>
-              <Image
-                className='w-full rounded-xl shadow-lg sm:w-auto'
-                src={portrait}
-                alt='Zrinski Photography Portrait'
-                width={238}
-                height={356}
-              />
+                <Image
+                  className='w-full rounded-xl shadow-lg sm:w-auto'
+                  src={portrait}
+                  alt='Zrinski Photography Portrait'
+                  width={238}
+                  height={356}
+                />
               <h3 className='absolute bottom-0 w-full rounded-b-xl bg-black pb-1 pl-4 pt-1 text-white'>
                 Antonija Zrinski
               </h3>
