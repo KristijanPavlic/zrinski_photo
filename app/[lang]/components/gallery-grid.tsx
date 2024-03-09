@@ -3,27 +3,29 @@
 import { useState, useEffect } from 'react'
 import { CldImage } from 'next-cloudinary'
 
-/* interface GalleryGridProps {
+interface GalleryGridProps {
   button1: string
   button2: string
-} */
+}
 
 const GalleryGrid = () => {
   const [images, setImages] = useState([])
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      const response = await fetch('/api/cloudinary')
+  const fetchImages = async () => {
+    const response = await fetch(`/api/cloudinary?t=${Date.now()}`, {
+      cache: 'no-cache'
+    })
 
-      if (response.ok) {
-        const data = await response.json()
+    if (response.ok) {
+      const data = await response.json()
 
-        setImages(data)
-      } else {
-        console.error('Error fetching images:', response.status)
-      }
+      setImages(data)
+    } else {
+      console.error('Error fetching images:', response.status)
     }
+  }
 
+  useEffect(() => {
     fetchImages()
   }, [])
 
@@ -44,15 +46,6 @@ const GalleryGrid = () => {
           </div>
         ))}
       </div>
-      {/* <div>
-        {totalImages > 6 ? (
-          ''
-        ) : (
-          <h3 className='m-auto mt-6 w-fit cursor-pointer text-center transition hover:text-[#BFA53D]'>
-            {button1}
-          </h3>
-        )}
-      </div> */}
     </>
   )
 }

@@ -27,7 +27,7 @@ export default async function Weddings({
           </Link>
         </div>
         <GalleryGrid
-          /* button1={page.gallery.moreBtn}
+        /* button1={page.gallery.moreBtn}
           button2={page.gallery.lessBtn} */
         />
       </div>

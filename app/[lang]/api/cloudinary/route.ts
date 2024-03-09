@@ -14,7 +14,8 @@ export async function GET() {
 
     const response = await fetch(url, {
       headers: {
-        Authorization: `Basic ${authString}`
+        Authorization: `Basic ${authString}`,
+        'Cache-Control': 'no-cache, no-store, must-revalidate'
       }
     })
 
@@ -23,6 +24,7 @@ export async function GET() {
     }
 
     const data = await response.json()
+
     const imageUrls = data.resources.map(
       (resource: CloudinaryImageResource) => resource.secure_url
     )
