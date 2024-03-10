@@ -56,47 +56,51 @@ const Dropzone = ({ className }) => {
   }
 
   async function action() {
-    const file = files[0]
-    if (!file) return
+    // Only proceed if there are actually files to upload
+    if (files.length === 0) return
 
-    // get a signature using server action
-    const { timestamp, signature } = await getSignature()
+    for (const file of files) {
+      // get a signature using server action
+      const { timestamp, signature } = await getSignature()
 
-    // upload to cloudinary using the signature
-    const formData = new FormData()
+      // upload to cloudinary using the signature
+      const formData = new FormData()
 
-    formData.append('file', file)
-    formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY)
-    formData.append('signature', signature)
-    formData.append('timestamp', timestamp)
-    formData.append('folder', 'next')
+      formData.append('file', file)
+      formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY)
+      formData.append('signature', signature)
+      formData.append('timestamp', timestamp)
+      formData.append('folder', 'next')
 
-    const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL
-    try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        body: formData
-      })
+      const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL
 
-      if (response.ok) {
-        const data = await response.json()
-
-        // write to database using server actions
-        await saveToDatabase({
-          version: data?.version,
-          signature: data?.signature,
-          public_id: data?.public_id
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body: formData
         })
 
-        setFiles([])
-        toast.success('Upload successful!')
-      } else {
-        toast.error('Upload failed. Please try again.')
+        if (response.ok) {
+          const data = await response.json()
+
+          // Write to database using server actions
+          await saveToDatabase({
+            version: data?.version,
+            signature: data?.signature,
+            public_id: data?.public_id
+          })
+
+          toast.success('File uploaded successfully!') // Report each file's status
+        } else {
+          toast.error('Upload failed for a file. Please check logs.')
+        }
+      } catch (error) {
+        console.error('Error during upload:', error)
+        toast.error('An error occurred during upload.')
       }
-    } catch (error) {
-      console.error('Error during upload:', error)
-      toast.error('An error occurred during upload.')
     }
+
+    setFiles([]) // Clear the files array after successful uploads
   }
 
   return (

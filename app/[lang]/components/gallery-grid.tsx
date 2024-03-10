@@ -29,6 +29,8 @@ const GalleryGrid = () => {
     fetchImages()
   }, [])
 
+  console.log(images)
+
   return (
     <>
       <div className='mt-5 grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:mt-10 xl:grid-cols-3'>
