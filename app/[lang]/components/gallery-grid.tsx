@@ -3,11 +3,6 @@
 import { useState, useEffect } from 'react'
 import { CldImage } from 'next-cloudinary'
 
-interface GalleryGridProps {
-  button1: string
-  button2: string
-}
-
 const GalleryGrid = () => {
   const [images, setImages] = useState([])
 
@@ -28,8 +23,6 @@ const GalleryGrid = () => {
   useEffect(() => {
     fetchImages()
   }, [])
-
-  console.log(images)
 
   return (
     <>

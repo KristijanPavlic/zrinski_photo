@@ -12,12 +12,18 @@ export async function GET() {
     const authString = btoa(`${apiKey}:${apiSecret}`)
     const url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/image`
 
-    const response = await fetch(url, {
-      headers: {
-        Authorization: `Basic ${authString}`,
-        'Cache-Control': 'no-cache, no-store, must-revalidate'
+    const response = await fetch(
+      'https://api.cloudinary.com/v1_1/dfwfplo4c/resources/image',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Basic ${authString}`,
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          Pragma: 'no-cache'
+        }
       }
-    })
+    )
 
     if (!response.ok) {
       throw new Error(`Error fetching images: ${response.status}`)
@@ -28,6 +34,9 @@ export async function GET() {
     const imageUrls = data.resources.map(
       (resource: CloudinaryImageResource) => resource.secure_url
     )
+
+    const test = JSON.stringify(imageUrls)
+    console.log(test)
 
     return new Response(JSON.stringify(imageUrls), { status: 200 })
   } catch (error: any) {

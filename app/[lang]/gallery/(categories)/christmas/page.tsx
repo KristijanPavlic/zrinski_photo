@@ -26,10 +26,7 @@ export default async function Christmas({
             </h1>
           </Link>
         </div>
-        <GalleryGrid
-          /* button1={page.gallery.moreBtn}
-          button2={page.gallery.lessBtn} */
-        />
+        <GalleryGrid />
       </div>
     </section>
   )
