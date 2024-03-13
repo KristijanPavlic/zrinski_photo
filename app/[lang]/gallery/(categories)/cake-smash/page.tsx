@@ -26,7 +26,7 @@ export default async function CakeSmash({
             </h1>
           </Link>
         </div>
-        <GalleryGrid />
+        <GalleryGrid folderProp='cake-smash' />
       </div>
     </section>
   )

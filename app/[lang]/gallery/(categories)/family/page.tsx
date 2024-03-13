@@ -26,7 +26,7 @@ export default async function Family({
             </h1>
           </Link>
         </div>
-        <GalleryGrid />
+        <GalleryGrid folderProp='family' />
       </div>
     </section>
   )

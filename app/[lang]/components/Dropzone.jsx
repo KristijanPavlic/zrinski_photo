@@ -12,6 +12,9 @@ const Dropzone = ({ className }) => {
   const [rejected, setRejected] = useState([])
   const [alertMessage, setAlertMessage] = useState(null)
 
+  // folder selection
+  const [selectedFolder, setSelectedFolder] = useState('weddings')
+
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
       setFiles(previousFiles => [
@@ -61,16 +64,17 @@ const Dropzone = ({ className }) => {
 
     for (const file of files) {
       // get a signature using server action
-      const { timestamp, signature } = await getSignature()
+      const { timestamp, signature } = await getSignature(selectedFolder)
 
       // upload to cloudinary using the signature
       const formData = new FormData()
+      console.log(selectedFolder)
 
       formData.append('file', file)
       formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY)
       formData.append('signature', signature)
       formData.append('timestamp', timestamp)
-      formData.append('folder', 'next')
+      formData.append('folder', selectedFolder)
 
       const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL
 
@@ -132,6 +136,28 @@ const Dropzone = ({ className }) => {
 
       {/* Preview */}
       <section className='mt-10'>
+        <div>
+          <h2 className='title text-3xl font-semibold'>Select Folder</h2>
+          <div className='mb-10 mt-5'>
+            <form>
+              <label for='categories'>
+                Choose a folder to upload images to:{' '}
+              </label>
+              <select
+                name='categories'
+                id='categories'
+                value={selectedFolder}
+                onChange={e => setSelectedFolder(e.target.value)}
+              >
+                <option value='weddings'>Weddings</option>
+                <option value='christening'>Christening</option>
+                <option value='cake-smash'>Cake Smash</option>
+                <option value='family'>Family - kids - pregnancy</option>
+                <option value='christmas'>Christmas</option>
+              </select>
+            </form>
+          </div>
+        </div>
         <div className='flex gap-4'>
           <h2 className='title text-3xl font-semibold'>Preview</h2>
           <button

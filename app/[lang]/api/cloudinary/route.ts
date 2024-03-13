@@ -1,6 +1,7 @@
 interface CloudinaryImageResource {
   public_id: string
   secure_url: string
+  folder?: string
 }
 
 export async function GET() {
@@ -12,18 +13,18 @@ export async function GET() {
     const authString = btoa(`${apiKey}:${apiSecret}`)
     const url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/image`
 
-    const response = await fetch(
-      'https://api.cloudinary.com/v1_1/dfwfplo4c/resources/image',
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Basic ${authString}`,
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          Pragma: 'no-cache'
-        }
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${authString}`,
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        Pragma: 'no-cache'
+      },
+      next: {
+        revalidate: 3600 // 1h
       }
-    )
+    })
 
     if (!response.ok) {
       throw new Error(`Error fetching images: ${response.status}`)
@@ -31,14 +32,14 @@ export async function GET() {
 
     const data = await response.json()
 
-    const imageUrls = data.resources.map(
-      (resource: CloudinaryImageResource) => resource.secure_url
+    const imageData = data.resources.map(
+      (resource: CloudinaryImageResource) => ({
+        url: resource.secure_url,
+        folder: resource.folder
+      })
     )
 
-    const test = JSON.stringify(imageUrls)
-    console.log(test)
-
-    return new Response(JSON.stringify(imageUrls), { status: 200 })
+    return new Response(JSON.stringify(imageData), { status: 200 })
   } catch (error: any) {
     console.error('Error fetching Cloudinary images:', error)
     return new Response('Error fetching images', { status: 500 })

@@ -15,14 +15,14 @@ interface InputData {
   signature: string
 }
 
-export async function getSignature(): Promise<{
+export async function getSignature(folder: string): Promise<{
   timestamp: number
   signature: string
 }> {
   const timestamp: number = Math.round(new Date().getTime() / 1000)
 
   const signature: string = cloudinary.utils.api_sign_request(
-    { timestamp, folder: 'next' },
+    { timestamp, folder: folder },
     cloudinaryConfig.api_secret!
   )
 
@@ -39,9 +39,4 @@ export async function saveToDatabase({
     { public_id, version },
     cloudinaryConfig.api_secret!
   )
-
-  if (expectedSignature === signature) {
-    // safe to write to database
-    console.log({ public_id })
-  }
 }

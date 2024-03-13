@@ -3,6 +3,10 @@ import { Locale } from '@/i18n.config'
 import { getDictionary } from '@/lib/dictionary'
 import Link from 'next/link'
 
+interface WeddignsProps {
+  category: string
+}
+
 export default async function Weddings({
   params: { lang }
 }: {
@@ -26,7 +30,7 @@ export default async function Weddings({
             </h1>
           </Link>
         </div>
-        <GalleryGrid />
+        <GalleryGrid folderProp='weddings' />
       </div>
     </section>
   )
