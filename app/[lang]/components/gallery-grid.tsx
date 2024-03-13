@@ -8,7 +8,7 @@ const GalleryGrid = () => {
 
   const fetchImages = async () => {
     const response = await fetch(`/api/cloudinary?t=${Date.now()}`, {
-      cache: 'no-cache'
+      cache: 'reload'
     })
 
     if (response.ok) {
@@ -35,7 +35,7 @@ const GalleryGrid = () => {
             <CldImage
               src={image}
               width={800}
-              height={460}
+              height={309.71}
               alt='gallery grid image'
             />
           </div>
