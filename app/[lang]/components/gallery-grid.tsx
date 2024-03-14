@@ -32,8 +32,6 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({ folderProp }) => {
     fetchImages()
   }, [])
 
-  console.log(folderProp)
-
   // Filter for matching images
   const filteredImages = images.filter(image => image.folder === folderProp)
 

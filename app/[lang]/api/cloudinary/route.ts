@@ -11,7 +11,7 @@ export async function GET() {
     const apiSecret = process.env.CLOUDINARY_API_SECRET
 
     const authString = btoa(`${apiKey}:${apiSecret}`)
-    const url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/image`
+    const url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/image?max_results=500`
 
     const response = await fetch(url, {
       method: 'GET',
