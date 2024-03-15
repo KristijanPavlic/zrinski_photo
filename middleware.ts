@@ -35,7 +35,9 @@ export default function middleware(
 
   if (
     pathname.startsWith('/en/sign-in') ||
-    pathname.startsWith('/en/dashboard')
+    pathname.startsWith('/en/dashboard') ||
+    pathname.startsWith('/en/gallery') ||
+    pathname.startsWith('/hr/gallery')
   ) {
     // Apply authMiddleware for specific routes
     return authMiddleware({

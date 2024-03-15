@@ -1,12 +1,19 @@
 import { Locale } from '@/i18n.config'
 import { getDictionary } from '@/lib/dictionary'
 
+import localFont from 'next/font/local'
+
 import Link from 'next/link'
 
 import Image from 'next/image'
 import hero1 from '@/public/hero_1.jpg'
 import hero2 from '@/public/hero_2.jpg'
 import hero3 from '@/public/hero_3.jpg'
+
+const EmithaScript = localFont({
+  src: '../../fonts/Emitha-Script.ttf',
+  display: 'swap'
+})
 
 export default async function Home({
   params: { lang }
@@ -22,7 +29,7 @@ export default async function Home({
         <div className='flex flex-col pb-10 lg:pb-0'>
           <h1 className='text-xl text-gray-500'>{page.home.title}</h1>
           <p
-            className={`max-w-md pt-5 font-serif text-3xl font-bold italic leading-[50px] lg:max-w-[500px] lg:text-4xl lg:leading-[72px] xl:max-w-[700px] xl:pt-20  xl:text-5xl xl:leading-[92px]`}
+            className={`max-w-sm pt-5 text-7xl leading-[70px] lg:max-w-[500px] lg:text-8xl lg:leading-[90px] xl:max-w-[700px] xl:pt-20 xl:text-9xl xl:leading-[130px] ${EmithaScript.className}`}
           >
             {page.home.description}
           </p>

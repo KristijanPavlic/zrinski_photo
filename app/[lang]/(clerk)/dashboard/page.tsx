@@ -16,7 +16,7 @@ export default async function Dashboard() {
           Welcome, {user?.firstName}
         </h2>
         <div className='mt-5 lg:mt-10'>
-          <UserButton afterSignOutUrl='/en' />
+          <UserButton afterSignOutUrl='/' />
         </div>
         <section className='py-24'>
           <div className='container'>
