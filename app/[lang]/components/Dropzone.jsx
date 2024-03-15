@@ -15,9 +15,6 @@ const Dropzone = ({ className }) => {
   // folder selection
   const [selectedFolder, setSelectedFolder] = useState('weddings')
 
-  // couples folders
-  /* const [folderName, setFolderName] = useState('') */
-
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
       setFiles(previousFiles => [
@@ -68,11 +65,6 @@ const Dropzone = ({ className }) => {
     for (const file of files) {
       // get a signature using server action
       const { timestamp, signature } = await getSignature(selectedFolder)
-      /* const { timestamp, signature } = await getSignature(
-        selectedFolder === 'weddings'
-          ? `${selectedFolder}/${folderName}`
-          : selectedFolder
-      ) */
 
       // upload to cloudinary using the signature
       const formData = new FormData()
@@ -82,12 +74,6 @@ const Dropzone = ({ className }) => {
       formData.append('signature', signature)
       formData.append('timestamp', timestamp)
       formData.append('folder', selectedFolder)
-      /* formData.append(
-        'folder',
-        selectedFolder === 'weddings'
-          ? `${selectedFolder}/${folderName}`
-          : selectedFolder
-      ) */
 
       const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL
 
