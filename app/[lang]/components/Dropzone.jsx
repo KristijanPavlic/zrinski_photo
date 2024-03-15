@@ -15,6 +15,9 @@ const Dropzone = ({ className }) => {
   // folder selection
   const [selectedFolder, setSelectedFolder] = useState('weddings')
 
+  // couples folders
+  /* const [folderName, setFolderName] = useState('') */
+
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
       setFiles(previousFiles => [
@@ -65,16 +68,26 @@ const Dropzone = ({ className }) => {
     for (const file of files) {
       // get a signature using server action
       const { timestamp, signature } = await getSignature(selectedFolder)
+      /* const { timestamp, signature } = await getSignature(
+        selectedFolder === 'weddings'
+          ? `${selectedFolder}/${folderName}`
+          : selectedFolder
+      ) */
 
       // upload to cloudinary using the signature
       const formData = new FormData()
-      console.log(selectedFolder)
 
       formData.append('file', file)
       formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY)
       formData.append('signature', signature)
       formData.append('timestamp', timestamp)
       formData.append('folder', selectedFolder)
+      /* formData.append(
+        'folder',
+        selectedFolder === 'weddings'
+          ? `${selectedFolder}/${folderName}`
+          : selectedFolder
+      ) */
 
       const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL
 
@@ -105,6 +118,21 @@ const Dropzone = ({ className }) => {
     }
 
     setFiles([]) // Clear the files array after successful uploads
+  }
+
+  // couples folder
+  const handleFolderCreation = () => {
+    if (!folderName) {
+      // Handle the case where folder name is empty (add error messages if needed)
+      toast.error('Please enter the name of a folder')
+      return
+    }
+
+    // Logic to create the folder (either call a server-side action or use a cloud storage SDK)
+    console.log(folderName)
+
+    // Clear folder name after success
+    setFolderName('')
   }
 
   return (
@@ -156,6 +184,7 @@ const Dropzone = ({ className }) => {
                 <option value='christmas'>Christmas</option>
               </select>
             </form>
+            
           </div>
         </div>
         <div className='flex gap-4'>
