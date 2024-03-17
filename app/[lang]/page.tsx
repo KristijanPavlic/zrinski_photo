@@ -49,33 +49,39 @@ export default async function Home({
           </div>
         </div>
         <div className='flex flex-col gap-5 lg:w-1/2 xl:w-1/3'>
-          <div>
-            <Image
-              className='rounded-xl shadow-lg'
-              src={hero1}
-              width={800}
-              height={500}
-              alt='First hero image'
-            />
+          <div className='w-full overflow-hidden rounded-xl shadow-lg hover:shadow-none'>
+            <Link href={`/${lang}/gallery`}>
+              <Image
+                className='relative rounded-xl bg-cover shadow-lg duration-200 ease-in-out hover:scale-110'
+                src={hero1}
+                width={800}
+                height={500}
+                alt='First hero image'
+              />
+            </Link>
           </div>
           <div className='flex gap-5'>
-            <div>
-              <Image
-                className='rounded-xl shadow-lg'
-                src={hero2}
-                width={400}
-                height={200}
-                alt='Second hero image'
-              />
+            <div className='w-full overflow-hidden rounded-xl shadow-lg hover:shadow-none'>
+              <Link href={`/${lang}/gallery`}>
+                <Image
+                  className='relative rounded-xl bg-cover shadow-lg duration-200 ease-in-out hover:scale-110'
+                  src={hero2}
+                  width={400}
+                  height={200}
+                  alt='Second hero image'
+                />
+              </Link>
             </div>
-            <div>
-              <Image
-                className='rounded-xl shadow-lg'
-                src={hero3}
-                width={400}
-                height={200}
-                alt='Third hero image'
-              />
+            <div className='w-full overflow-hidden rounded-xl shadow-lg hover:shadow-none'>
+              <Link href={`/${lang}/gallery`}>
+                <Image
+                  className='relative rounded-xl bg-cover shadow-lg duration-200 ease-in-out hover:scale-110'
+                  src={hero3}
+                  width={400}
+                  height={200}
+                  alt='Third hero image'
+                />
+              </Link>
             </div>
           </div>
         </div>

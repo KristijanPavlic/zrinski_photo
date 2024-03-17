@@ -3,16 +3,12 @@ import { Locale } from '@/i18n.config'
 import { getDictionary } from '@/lib/dictionary'
 import Link from 'next/link'
 
-import { currentUser } from '@clerk/nextjs'
-
 export default async function Family({
   params: { lang }
 }: {
   params: { lang: Locale }
 }) {
   const { page } = await getDictionary(lang)
-
-  const user = await currentUser()
 
   return (
     <section className='py-10 lg:py-32'>
@@ -30,7 +26,7 @@ export default async function Family({
             </h1>
           </Link>
         </div>
-        <GalleryGrid folderProp='family' userId={user?.id} />
+        <GalleryGrid folderProp='family' />
       </div>
     </section>
   )
