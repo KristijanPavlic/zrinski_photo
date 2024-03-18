@@ -1,3 +1,4 @@
+import BackToTop from '@/app/[lang]/components/back-to-top'
 import GalleryGrid from '@/app/[lang]/components/gallery-grid'
 import { Locale } from '@/i18n.config'
 import { getDictionary } from '@/lib/dictionary'
@@ -28,6 +29,7 @@ export default async function Christmas({
         </div>
         <GalleryGrid folderProp='christmas' />
       </div>
+      <BackToTop />
     </section>
   )
 }
