@@ -9,6 +9,8 @@ cloudinary.v2.config({
 
 export async function POST(req: NextRequest) {
   const { publicId, folder } = await req.json()
+  console.log('Received publicId:', publicId)
+  console.log('Received folder:', folder)
 
   try {
     await cloudinary.v2.uploader.destroy(`${folder}/${publicId}`, {
@@ -17,6 +19,7 @@ export async function POST(req: NextRequest) {
 
     return new NextResponse('Image deleted successfully', { status: 200 })
   } catch (error: any) {
+    console.error('Error deleting image:', error)
     return new NextResponse('Error deleting image:', { status: 500 })
   }
 }
