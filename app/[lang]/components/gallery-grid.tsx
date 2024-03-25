@@ -38,26 +38,20 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({ folderProp }) => {
     fetchImages()
   }, [])
 
-  // Filter for matching images
   const filteredImages = images.filter(image => image.folder === folderProp)
 
   const deleteImage = async (url: string) => {
     try {
-      // Construct data for your API request
       const publicId = url.split('/')[8].split('.')[0]
+      const folder = folderProp
 
       const response = await fetch(`/api/delete-image`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          Pragma: 'no-cache'
-        },
-        body: JSON.stringify({ publicId })
+        cache: 'reload',
+        body: JSON.stringify({ publicId, folder })
       })
 
       if (response.ok) {
-        // Successfully deleted, update images state
         setImages(images.filter(image => image.url !== url))
       } else {
         console.error('Error deleting image:', response.status)
