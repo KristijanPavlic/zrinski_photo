@@ -43,23 +43,13 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({ folderProp }) => {
 
   const deleteImage = async (url: string) => {
     try {
-      const apiKey = process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY
-      const apiSecret = process.env.CLOUDINARY_API_SECRET
-
-      const authString = btoa(`${apiKey}:${apiSecret}`)
-
       // Construct data for your API request
       const publicId = url.split('/')[8].split('.')[0]
-      const data = {
-        imageUrl: publicId
-        // Potentially add any Cloudinary-specific params
-      }
 
       const response = await fetch(`/api/delete-image`, {
-        method: 'DELETE',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Basic ${authString}`,
           'Cache-Control': 'no-cache, no-store, must-revalidate',
           Pragma: 'no-cache'
         },
