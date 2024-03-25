@@ -78,7 +78,7 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({ folderProp }) => {
                 src={image.url}
                 width={800}
                 height={309.71}
-                alt='gallery grid image'
+                alt='This image has been deleted'
               />
               {(user?.id === process.env.NEXT_PUBLIC_ADMIN_KEY ||
                 user?.id === process.env.NEXT_PUBLIC_ANTONIJA_KEY) && (

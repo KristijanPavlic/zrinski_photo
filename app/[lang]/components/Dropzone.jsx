@@ -170,7 +170,6 @@ const Dropzone = ({ className }) => {
                 <option value='christmas'>Christmas</option>
               </select>
             </form>
-            
           </div>
         </div>
         <div className='flex gap-4'>
@@ -180,7 +179,7 @@ const Dropzone = ({ className }) => {
             onClick={removeAll}
             className='mt-1 rounded-md border border-rose-400 px-3 text-[12px] font-bold uppercase tracking-wider text-stone-500 transition-colors hover:bg-rose-400 hover:text-white'
           >
-            Remove all files
+            Remove all images
           </button>
           <button
             type='submit'
@@ -190,9 +189,9 @@ const Dropzone = ({ className }) => {
           </button>
         </div>
 
-        {/* Accepted files */}
+        {/* Accepted images */}
         <h3 className='title mt-10 border-b pb-3 text-lg font-semibold text-stone-600'>
-          Accepted Files
+          Accepted Images
         </h3>
         <ul className='mt-6 grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'>
           {files.map(file => (
@@ -221,9 +220,9 @@ const Dropzone = ({ className }) => {
           ))}
         </ul>
 
-        {/* Rejected Files */}
+        {/* Rejected Images */}
         <h3 className='title mt-24 border-b pb-3 text-lg font-semibold text-stone-600'>
-          Rejected Files
+          Rejected Images
         </h3>
         <ul className='mt-6 flex flex-col'>
           {rejected.map(({ file, errors }) => (

@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   authors: { name: 'Kristijan Pavlic Tumpa' },
   icons: [
     {
-      url: './icon.svg',
-      href: './icon.svg'
+      url: '../../../public/icon.svg',
+      href: '../../../public/icon.svg'
     }
   ]
 }
