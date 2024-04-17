@@ -76,8 +76,8 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({ folderProp }) => {
             <div key={image.url} className='relative'>
               <CldImage
                 src={image.url}
-                width={800}
-                height={309.71}
+                width={600}
+                height={400}
                 alt='This image has been deleted'
               />
               {(user?.id === process.env.NEXT_PUBLIC_ADMIN_KEY ||

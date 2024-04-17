@@ -5,10 +5,10 @@ import Link from 'next/link'
 
 import Image, { StaticImageData } from 'next/image'
 import weddingImage from '@/public/weddings.jpg'
-import christeningImage from '@/public/baptism.avif'
+import christeningImage from '@/public/baptism.jpg'
 import cakeSmashImage from '@/public/cake_smash.jpg'
-import familyImage from '@/public/family.avif'
-import christmasImage from '@/public/christmas.avif'
+import familyImage from '@/public/family.jpg'
+import christmasImage from '@/public/christmas.jpg'
 
 type CategoryImages = {
   [key: string]: StaticImageData
