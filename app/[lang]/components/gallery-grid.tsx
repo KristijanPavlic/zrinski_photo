@@ -7,6 +7,7 @@ import { useUser } from '@clerk/nextjs'
 
 interface GalleryGridProps {
   folderProp?: string
+  info: string
 }
 
 interface ImageData {
@@ -14,7 +15,7 @@ interface ImageData {
   folder?: string
 }
 
-const GalleryGrid: React.FC<GalleryGridProps> = ({ folderProp }) => {
+const GalleryGrid: React.FC<GalleryGridProps> = ({ folderProp, info }) => {
   const [images, setImages] = useState<ImageData[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null)
@@ -104,7 +105,7 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({ folderProp }) => {
         ))
       ) : (
         <div className='col-span-full flex h-64 items-center justify-center'>
-          <p>No images found in this folder.</p>
+          <p>{info}</p>
         </div>
       )}
 
