@@ -27,7 +27,7 @@ export default async function Christening({
             </h1>
           </Link>
         </div>
-        <GalleryGrid folderProp='christening' />
+        <GalleryGrid folderProp='christening' info={page.gallery.info} />
       </div>
       <BackToTop />
     </section>

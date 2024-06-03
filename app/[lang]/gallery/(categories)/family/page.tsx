@@ -27,7 +27,7 @@ export default async function Family({
             </h1>
           </Link>
         </div>
-        <GalleryGrid folderProp='family' />
+        <GalleryGrid folderProp='family' info={page.gallery.info} />
       </div>
       <BackToTop />
     </section>

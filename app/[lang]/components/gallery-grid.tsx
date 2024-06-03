@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { CldImage } from 'next-cloudinary'
+import Image from 'next/image'
 import { useUser } from '@clerk/nextjs'
 
 interface GalleryGridProps {
@@ -16,6 +17,7 @@ interface ImageData {
 const GalleryGrid: React.FC<GalleryGridProps> = ({ folderProp }) => {
   const [images, setImages] = useState<ImageData[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [fullscreenImage, setFullscreenImage] = useState<string | null>(null)
 
   const { user } = useUser()
 
@@ -67,8 +69,8 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({ folderProp }) => {
         <div className='col-span-full flex h-64 items-center justify-center '>
           <div className='h-16 w-16 animate-spin rounded-full border-4 border-[#BFA53D] border-t-transparent'></div>
         </div>
-      ) : (
-        filteredImages?.map(image => (
+      ) : filteredImages.length > 0 ? (
+        filteredImages.map(image => (
           <div
             key={image.url}
             className='h-fit w-full transform overflow-hidden rounded-xl shadow-lg transition-transform duration-300 ease-in-out hover:scale-105'
@@ -78,7 +80,9 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({ folderProp }) => {
                 src={image.url}
                 width={600}
                 height={400}
-                alt='This image has been deleted'
+                alt='There is a problem with loading this image'
+                className='hover:cursor-pointer'
+                onClick={() => setFullscreenImage(image.url)}
               />
               {(user?.id === process.env.NEXT_PUBLIC_ADMIN_KEY ||
                 user?.id === process.env.NEXT_PUBLIC_ANTONIJA_KEY) && (
@@ -98,6 +102,33 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({ folderProp }) => {
             </div>
           </div>
         ))
+      ) : (
+        <div className='col-span-full flex h-64 items-center justify-center'>
+          <p>No images found in this folder.</p>
+        </div>
+      )}
+
+      {fullscreenImage && (
+        <div
+          className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 transition-all duration-300'
+          onClick={() => setFullscreenImage(null)}
+        >
+          <div className='relative' onClick={e => e.stopPropagation()}>
+            <Image
+              src={fullscreenImage}
+              width={1000}
+              height={700}
+              alt='Fullscreen Image'
+              className='max-h-screen max-w-full'
+            />
+            <button
+              onClick={() => setFullscreenImage(null)}
+              className='absolute right-2 top-2 rounded bg-red-500 px-4 py-2 text-white'
+            >
+              &#10005;
+            </button>
+          </div>
+        </div>
       )}
     </div>
   )

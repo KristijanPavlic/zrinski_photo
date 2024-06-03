@@ -27,7 +27,7 @@ export default async function Christmas({
             </h1>
           </Link>
         </div>
-        <GalleryGrid folderProp='christmas' />
+        <GalleryGrid folderProp='christmas' info={page.gallery.info} />
       </div>
       <BackToTop />
     </section>

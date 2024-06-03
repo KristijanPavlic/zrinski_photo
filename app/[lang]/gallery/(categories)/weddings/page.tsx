@@ -27,7 +27,7 @@ export default async function Weddings({
             </h1>
           </Link>
         </div>
-        <GalleryGrid folderProp='weddings' />
+        <GalleryGrid folderProp='weddings' info={page.gallery.info} />
       </div>
       <BackToTop />
     </section>
