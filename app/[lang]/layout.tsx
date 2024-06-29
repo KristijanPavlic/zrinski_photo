@@ -21,15 +21,64 @@ import Loading from './loading'
 const poppins = Poppins({ subsets: ['latin'], weight: '400' })
 
 export const metadata: Metadata = {
-  title: 'Zrinski Photography',
-  description: 'Zrinski Photography',
+  title: 'Zrinski Photography - Capturing Moments, Creating Memories',
+  keywords: [
+    'photography',
+    'Zrinski Photography',
+    'Antonija Zrinski',
+    'photographer',
+    'professional photography',
+    'wedding photography',
+    'portrait photography',
+    'event photography',
+    'photography portfolio',
+    'photo gallery',
+    'Zrinski Photography portfolio',
+    'Zrinski Photography website',
+    'Antonija Zrinski photography',
+    'Antonija Zrinski photographer',
+    'Antonija Zrinski portfolio',
+    'fotografija',
+    'Zrinski fotografija',
+    'Antonija Zrinski',
+    'fotograf',
+    'profesionalno fotografiranje',
+    'fotografiranje vjenčanja',
+    'portretna fotografija',
+    'fotografija događaja',
+    'portfolio fotografija',
+    'FOTOGALERIJA',
+    'Portfolio Zrinski Photography',
+    'web stranica Zrinski Photography',
+    'Antonija Zrinski fotografija',
+    'Antonija Zrinski fotograf',
+    'Antonija Zrinski portfelj'
+  ],
+  description: 'Zrinski Photography - Capturing Moments, Creating Memories',
   authors: { name: 'Kristijan Pavlic Tumpa' },
+  robots: 'index, follow',
   icons: [
     {
-      url: './icon.svg',
-      href: './icon.svg'
+      url: '/favicon.ico',
+      href: '/favicon.ico',
+      type: 'image/ico'
     }
-  ]
+  ],
+  openGraph: {
+    title: 'Zrinski Photography - Capturing Moments, Creating Memories',
+    description:
+      'Explore Zrinski Photography, the professional portfolio of Antonija Zrinski. Discover stunning photos, creative projects, and contact information.',
+    url: 'https://zrinski-photo.com',
+    type: 'website',
+    images: [
+      {
+        url: 'https://zrinski-photo.com/favicon.ico',
+        width: 32,
+        height: 32,
+        alt: 'Zrinski Photography Logo'
+      }
+    ]
+  }
 }
 
 export async function generateStaticParams() {
