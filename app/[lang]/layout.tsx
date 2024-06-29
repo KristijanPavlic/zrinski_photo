@@ -59,8 +59,9 @@ export const metadata: Metadata = {
   robots: 'index, follow',
   icons: [
     {
-      url: '/favicon.ico',
-      href: '/favicon.ico',
+      url: './favicon.ico',
+      href: './favicon.ico',
+      sizes: '256x256',
       type: 'image/ico'
     }
   ],
@@ -73,8 +74,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: 'https://zrinski-photo.com/favicon.ico',
-        width: 32,
-        height: 32,
+        width: 256,
+        height: 256,
         alt: 'Zrinski Photography Logo'
       }
     ]
