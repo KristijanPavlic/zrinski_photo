@@ -1,3 +1,4 @@
+// _action.ts
 'use server'
 
 import { v2 as cloudinary, ConfigOptions } from 'cloudinary'
@@ -15,14 +16,14 @@ interface InputData {
   signature: string
 }
 
-export async function getSignature(folder: string): Promise<{
-  timestamp: number
-  signature: string
-}> {
+export async function getSignature(
+  folder: string,
+  public_id: string
+): Promise<{ timestamp: number; signature: string }> {
   const timestamp: number = Math.round(new Date().getTime() / 1000)
 
   const signature: string = cloudinary.utils.api_sign_request(
-    { timestamp, folder: folder },
+    { timestamp, folder, public_id },
     cloudinaryConfig.api_secret!
   )
 
@@ -34,7 +35,6 @@ export async function saveToDatabase({
   version,
   signature
 }: InputData): Promise<void> {
-  // verify the data
   const expectedSignature: string = cloudinary.utils.api_sign_request(
     { public_id, version },
     cloudinaryConfig.api_secret!
