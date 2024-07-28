@@ -24,7 +24,13 @@ export default async function Footer({ lang }: { lang: Locale }) {
           </Link>
         </div>
         <div className='pt-4 md:pt-0'>
-          <span aria-label='Made by information'>{footer.made}</span>
+          <Link
+            className='transition hover:text-[#BFA53D]'
+            href='https://kripaweb.com/'
+            aria-label='Made by information'
+          >
+            {footer.made}
+          </Link>
         </div>
       </div>
     </footer>
