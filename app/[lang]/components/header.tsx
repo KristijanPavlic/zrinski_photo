@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -17,6 +17,8 @@ export default function Header({ lang }: { lang: Locale }) {
     contact: string
   } | null>(null)
   const [showMenu, setShowMenu] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const navRef = useRef<HTMLDivElement>(null)
 
   const pathName = usePathname()
 
@@ -27,14 +29,30 @@ export default function Header({ lang }: { lang: Locale }) {
     }
 
     fetchData()
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    window.addEventListener('resize', handleResize)
+    handleResize()
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setShowMenu(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
   }, [lang])
 
   const handleMenuClick = () => {
-    if (showMenu) {
-      setShowMenu(false)
-    } else {
-      setShowMenu(true)
-    }
+    setShowMenu(!showMenu)
   }
 
   const closeMenuOnClick = () => {
@@ -54,7 +72,7 @@ export default function Header({ lang }: { lang: Locale }) {
   return (
     <header className='sticky top-0 z-50 border-b-2 bg-white py-4 shadow-lg'>
       <nav className='container font-serif text-lg'>
-        <div className='flex items-center justify-between'>
+        <div ref={navRef} className='flex items-center justify-between'>
           <div>
             <Link href={`/${lang}`} onClick={closeMenuOnClick}>
               <Image
@@ -104,7 +122,7 @@ export default function Header({ lang }: { lang: Locale }) {
             <nav
               id='navMenu'
               className={`absolute left-0 top-[84px] z-50 h-fit w-full border-b-2 bg-white px-6 py-4 shadow-lg ${
-                showMenu ? 'block' : 'hidden'
+                showMenu ? 'show' : ''
               }`}
             >
               <ul className='flex h-full flex-col justify-center gap-y-2'>
