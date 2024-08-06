@@ -1,9 +1,13 @@
 'use client'
 
+import '../globals.css'
+
+import Image from 'next/image'
+import Link from 'next/link'
+
 import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
-import Link from 'next/link'
-import Image from 'next/image'
+
 import { Locale } from '@/i18n.config'
 import { getDictionary } from '@/lib/dictionary'
 import LocaleSwitcher from './locale-switcher'
@@ -16,9 +20,10 @@ export default function Header({ lang }: { lang: Locale }) {
     about: string
     contact: string
   } | null>(null)
-  const [showMenu, setShowMenu] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [navVisible, setNavVisible] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const navRef = useRef<HTMLDivElement>(null)
+  const navRef = useRef(null)
 
   const pathName = usePathname()
 
@@ -27,8 +32,11 @@ export default function Header({ lang }: { lang: Locale }) {
       const dictionary = await getDictionary(lang)
       setNavigation(dictionary.navigation)
     }
-
     fetchData()
+  }, [lang])
+
+  useEffect(() => {
+    setNavVisible(true)
 
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768)
@@ -37,129 +45,93 @@ export default function Header({ lang }: { lang: Locale }) {
     window.addEventListener('resize', handleResize)
     handleResize()
 
-    const handleClickOutside = (event: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(event.target as Node)) {
-        setShowMenu(false)
-      }
-    }
-
     document.addEventListener('mousedown', handleClickOutside)
 
     return () => {
       window.removeEventListener('resize', handleResize)
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [lang])
+  }, [])
 
-  const handleMenuClick = () => {
-    setShowMenu(!showMenu)
+  const handleClickOutside = (event: MouseEvent) => {
+    if (navRef.current && !(navRef.current as any).contains(event.target)) {
+      setMenuOpen(false)
+    }
   }
 
-  const closeMenuOnClick = () => {
-    setShowMenu(false)
-  }
-
-  const menuBtnText = () => {
-    return lang === 'en'
-      ? showMenu
-        ? 'Close'
-        : 'Menu'
-      : showMenu
-        ? 'Zatvori'
-        : 'Meni'
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen)
   }
 
   return (
-    <header className='sticky top-0 z-50 border-b-2 bg-white py-4 shadow-lg'>
-      <nav className='container font-serif text-lg'>
-        <div ref={navRef} className='flex items-center justify-between'>
-          <div>
-            <Link href={`/${lang}`} onClick={closeMenuOnClick}>
-              <Image
-                src={ZrinskiLogo}
-                alt='Zrinski Photography Logo'
-                width={100}
-                height={100}
-              />
-            </Link>
-          </div>
-
-          <div className='hidden md:block'>
-            <ul className='desktop-nav flex gap-x-8'>
-              <li
-                className={`w-fit transition hover:text-[#BFA53D] ${pathName.length < 4 ? 'text-[#BFA53D]' : ''}`}
-              >
-                <Link href={`/${lang}`}>{navigation?.home}</Link>
-              </li>
-              <li
-                className={`w-fit transition hover:text-[#BFA53D] ${pathName.includes('/gallery') ? 'text-[#BFA53D]' : ''}`}
-              >
-                <Link href={`/${lang}/gallery`}>{navigation?.gallery}</Link>
-              </li>
-              <li
-                className={`w-fit transition hover:text-[#BFA53D] ${pathName.includes('/about') ? 'text-[#BFA53D]' : ''}`}
-              >
-                <Link href={`/${lang}/about`}>{navigation?.about}</Link>
-              </li>
-              <li
-                className={`w-fit transition hover:text-[#BFA53D] ${pathName.includes('/contact') ? 'text-[#BFA53D]' : ''}`}
-              >
-                <Link href={`/${lang}/contact`}>{navigation?.contact}</Link>
-              </li>
-              <LocaleSwitcher />
-            </ul>
-          </div>
-
-          <div className='md:hidden'>
-            <button
-              onClick={handleMenuClick}
-              className={`transition hover:text-[#BFA53D] ${
-                showMenu ? 'close' : ''
-              }`}
-            >
-              {menuBtnText()}
-            </button>
-            <nav
-              id='navMenu'
-              className={`absolute left-0 top-[84px] z-50 h-fit w-full border-b-2 bg-white px-6 py-4 shadow-lg ${
-                showMenu ? 'show' : ''
-              }`}
-            >
-              <ul className='flex h-full flex-col justify-center gap-y-2'>
-                <li
-                  className={`w-fit transition hover:text-[#BFA53D] ${pathName.length < 4 ? 'text-[#BFA53D]' : ''}`}
-                >
-                  <Link href={`/${lang}`} onClick={closeMenuOnClick}>
-                    {navigation?.home}
-                  </Link>
-                </li>
-                <li
-                  className={`w-fit transition hover:text-[#BFA53D] ${pathName.includes('/gallery') ? 'text-[#BFA53D]' : ''}`}
-                >
-                  <Link href={`/${lang}/gallery`} onClick={closeMenuOnClick}>
-                    {navigation?.gallery}
-                  </Link>
-                </li>
-                <li
-                  className={`w-fit transition hover:text-[#BFA53D] ${pathName.includes('/about') ? 'text-[#BFA53D]' : ''}`}
-                >
-                  <Link href={`/${lang}/about`} onClick={closeMenuOnClick}>
-                    {navigation?.about}
-                  </Link>
-                </li>
-                <li
-                  className={`w-fit transition hover:text-[#BFA53D] ${pathName.includes('/contact') ? 'text-[#BFA53D]' : ''}`}
-                >
-                  <Link href={`/${lang}/contact`} onClick={closeMenuOnClick}>
-                    {navigation?.contact}
-                  </Link>
-                </li>
-                <LocaleSwitcher />
-              </ul>
-            </nav>
+    <section
+      ref={navRef}
+      className={`duration-800 sticky top-0 z-40 w-full border-b-2 bg-white py-4 transition-all ease-in-out ${
+        navVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}
+    >
+      <nav className='container z-50 m-auto flex w-full items-center justify-between bg-white px-4'>
+        <Link href={`/${lang}`} onClick={() => setMenuOpen(false)}>
+          <Image
+            src={ZrinskiLogo}
+            alt='Zrinski Photography Logo'
+            width={100}
+            height={100}
+          />
+        </Link>
+        <div className='z-[999] flex items-center md:hidden'>
+          {isMobile && <LocaleSwitcher />}
+          <div
+            onClick={toggleMenu}
+            className={`hamburger ml-6 ${menuOpen ? 'open' : ''}`}
+          >
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
         </div>
+        <ul
+          className={`absolute left-0 z-50 w-full border-b-2 bg-white text-lg transition-all duration-300 ease-in-out md:static md:flex md:space-x-14 md:border-none md:bg-transparent ${
+            menuOpen
+              ? 'top-16 opacity-100'
+              : 'top-[-200px] opacity-0 md:opacity-100'
+          } md:flex md:items-center md:justify-end`}
+        >
+          <li
+            className={`m-auto w-fit pt-6 text-center transition hover:text-[#BFA53D] md:m-0 md:p-0 ${pathName.length < 4 ? 'text-[#BFA53D]' : ''}`}
+          >
+            <Link href={`/${lang}`} onClick={() => setMenuOpen(false)}>
+              {navigation?.home}
+            </Link>
+          </li>
+          <li
+            className={`m-auto w-fit pt-6 text-center transition hover:text-[#BFA53D] md:p-0 ${pathName.includes('/gallery') ? 'text-[#BFA53D]' : ''}`}
+          >
+            <Link href={`/${lang}/gallery`} onClick={() => setMenuOpen(false)}>
+              {navigation?.gallery}
+            </Link>
+          </li>
+          <li
+            className={`m-auto w-fit pt-6 text-center transition hover:text-[#BFA53D] md:p-0 ${pathName.includes('/about') ? 'text-[#BFA53D]' : ''}`}
+          >
+            <Link href={`/${lang}/about`} onClick={() => setMenuOpen(false)}>
+              {navigation?.about}
+            </Link>
+          </li>
+          <li
+            className={`m-auto w-fit pb-6 pt-6 text-center transition hover:text-[#BFA53D] md:p-0 ${pathName.includes('/contact') ? 'text-[#BFA53D]' : ''}`}
+          >
+            <Link href={`/${lang}/contact`} onClick={() => setMenuOpen(false)}>
+              {navigation?.contact}
+            </Link>
+          </li>
+          {!isMobile && (
+            <li className='mx-auto mt-4 text-center md:mx-0 md:mt-0'>
+              <LocaleSwitcher />
+            </li>
+          )}
+        </ul>
       </nav>
-    </header>
+    </section>
   )
 }
