@@ -1,22 +1,21 @@
-import { UserButton, auth, currentUser } from '@clerk/nextjs'
+import { UserButton } from '@clerk/nextjs'
+import { auth, currentUser } from '@clerk/nextjs/server'
 import Dropzone from '../../components/Dropzone'
 
 export default async function Dashboard() {
-  const { userId } = auth()
+  const user = await currentUser()
   const adminId = process.env.NEXT_PRIVATE_ADMIN_KEY
   const antonijaId = process.env.NEXT_PRIVATE_ANTONIJA_KEY
 
-  const user = await currentUser()
-
-  if (userId === adminId || userId === antonijaId) {
+  if (user?.id === adminId || user?.id === antonijaId) {
     return (
       <div className='container flex flex-col justify-center'>
         <h1 className='text-xl font-bold lg:text-3xl'>Dashboard</h1>
         <h2 className='mt-2 text-base lg:mt-5 lg:text-2xl'>
-          Welcome, {user?.firstName}
+          Welcome, {user!.firstName}
         </h2>
         <div className='mt-5 lg:mt-10'>
-          <UserButton afterSignOutUrl='/' />
+          <UserButton />
         </div>
         <section className='py-24'>
           <div className='container'>
@@ -35,7 +34,7 @@ export default async function Dashboard() {
           You do not have permission to access this page. Please sign in using a
           different account.
         </span>
-        <UserButton afterSignOutUrl='/en/sign-in' />
+        <UserButton />
       </div>
     )
   }

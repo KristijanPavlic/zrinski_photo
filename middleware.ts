@@ -1,72 +1,49 @@
-import { authMiddleware } from '@clerk/nextjs'
-
-import { NextFetchEvent, NextResponse } from 'next/server'
-import { NextRequest } from 'next/server'
-
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { NextResponse } from 'next/server'
 import { i18n } from '@/i18n.config'
-
-import { match as matchLocale } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
 
-function getLocale(request: NextRequest): string | undefined {
-  const negotiatorHeaders: Record<string, string> = {}
+import { NextRequest } from 'next/server'
+
+function getLocale(request: NextRequest) {
+  const negotiatorHeaders: { [key: string]: string } = {}
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
 
-  // @ts-ignore locales are readonly
-  const locales: string[] = i18n.locales
+  const locales = i18n.locales
   const languages = new Negotiator({ headers: negotiatorHeaders }).languages()
+  const locale = locales.find(l => languages.includes(l)) || i18n.defaultLocale
 
-  const locale = matchLocale(languages, locales, i18n.defaultLocale)
   return locale
 }
 
-export default function middleware(
-  request: NextRequest,
-  event: NextFetchEvent
-) {
-  const pathname = request.nextUrl.pathname
+const isProtectedRoute = createRouteMatcher([
+  '/en/dashboard(.*)',
+  '/hr/dashboard(.*)',
+  '/gallery(.*)'
+])
 
-  if (
-    pathname.startsWith('/hr/sign-in') ||
-    pathname.startsWith('/hr/dashboard')
-  ) {
-    return NextResponse.redirect(new URL(`/en/dashboard`, request.url))
-  }
+export default clerkMiddleware(async (auth, request) => {
+  const { pathname } = request.nextUrl
 
-  if (
-    pathname.startsWith('/en/sign-in') ||
-    pathname.startsWith('/en/dashboard') ||
-    pathname.startsWith('/en/gallery') ||
-    pathname.startsWith('/hr/gallery')
-  ) {
-    // Apply authMiddleware for specific routes
-    return authMiddleware({
-      publicRoutes: req => !req.url.includes('/en/dashboard'),
-      ignoredRoutes: [
-        '/((?!api|trpc))(_next.*|.+.[w]+$)',
-        '/en/sign-in',
-        '/en/sign-up'
-      ]
-    })(request, event)
-  }
-
+  // Locale redirection
   const pathnameIsMissingLocale = i18n.locales.every(
     locale => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   )
 
   if (pathnameIsMissingLocale) {
-    // Redirect if there is no locale
     const locale = getLocale(request)
-
-    return NextResponse.redirect(
-      new URL(
-        `/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`,
-        request.url
-      )
-    )
+    return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url))
   }
-}
+
+  // Protect routes
+  if (isProtectedRoute(request)) {
+    await auth.protect()
+  }
+})
 
 export const config = {
-  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)']
+  matcher: [
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    '/(api|trpc)(.*)'
+  ]
 }
